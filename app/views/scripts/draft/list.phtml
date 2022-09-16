@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Developers Team</title>
+		<meta charset="UTF-8">
+		<link rel="icon" type="image/x-icon" href="../icons/user-gear.png">
+		<link rel="stylesheet" href="../CSS/tuHeader.css">
+		<link rel="stylesheet" href="../CSS/tuMainList.css">
+	</head>
+
+	<body>
+
+			<header>
+
+				<nav>
+					<div id="Menu">
+						<a class="Menu" href="/draft/">User</a>
+						<a class="Menu" href="/draft/task/">Task</a>
+						<a class="Menu" href="/draft/list/">List</a>
+					</div>
+				</nav>
+
+				<div id="AppName">
+					<h1>Task Updater</h1>
+				</div>
+
+			</header>
+
+			<main>
+
+				<div id="Labels">
+					<div id="l1"><h3>List</h3></div>
+					<div id="l2"><h3>Check</h3></div>
+				</div>
+
+				<div id="Columns">
+					<div id="c1">
+						<form action="">
+							<input type="text" name="user" placeholder="Full name">
+							<input type="text" name="description" placeholder="Description">
+							<input type="datetime-local" name="dStart" placeholder="Start date">
+							<input type="datetime-local" name="dFinish" placeholder="Finish date">
+
+							<div class="cRadio">
+								<label for="Pending1">Pending</label>
+								<input type="radio" id="Pending1" class="cR" name="Pending1" value="pending">
+								<label for="Running1">Running</label>
+								<input type="radio" id="Running1" class="cR" name="Running1" value="running">
+								<label for="Finished1">Finished</label>
+								<input type="radio" id="Finished1" class="cR" name="Finished1" value="finished">
+							</div>
+
+							<button type="submit" href="">Show list</button>
+						</form>
+					</div>
+
+					<div id="c2">
+						<form action="">
+							<input type="text" name="user" placeholder="Full name">
+							<input type="text" name="description" placeholder="Description">
+							<input type="datetime-local" name="dStart" placeholder="Start date">
+							<input type="datetime-local" name="dFinish" placeholder="Finish date">
+
+							<div class="cRadio">
+								<label for="Pending2">Pending</label>
+								<input type="radio" id="Pending2" class="cR" name="Pending2" value="pending">
+								<label for="Running2">Running</label>
+								<input type="radio" id="Running2" class="cR" name="Running2" value="running">
+								<label for="Finished2">Finished</label>
+								<input type="radio" id="Finished2" class="cR" name="Finished2" value="finished">
+							</div>
+
+							<button type="submit" href="">Check</button>
+						</form>
+					</div>
+
+				</div>
+
+			</main>
+
+	</body>
+
+</html>
+

@@ -1,0 +1,110 @@
+main {
+	padding: 10px 5px 10px 10px;
+
+	background-color: LightBlue;
+	color: Navy;
+
+	display: flex;
+	flex-direction: column;
+}
+
+#Labels {
+	display: flex;
+	flex-direction: row;
+}
+
+#l1 {
+	margin: 5px;
+
+	flex-basis: 50%;
+
+	display: flex;
+	justify-content: flex-start;
+}
+
+#l2 {
+	margin: 5px;
+
+	visibility: visible;
+
+	flex-basis: 50%;
+
+	display: flex;
+	justify-content: flex-start;
+}
+
+#Columns {
+	display: flex;
+	flex-direction: row;
+}
+
+#c1 {
+	margin: 5px;
+	background-color: BurlyWood;
+
+	flex-basis: 50%;
+
+	display: flex;
+	justify-content: center;
+}
+
+.cRadio {
+	padding: 0px 0px 5px 0px;
+	display: flex;
+	flex-direction: row;
+}
+
+.cR {
+	margin: 5px;
+}
+
+#c2 {
+	margin: 5px;
+	background-color: BurlyWood;
+
+	visibility: visible;
+
+	flex-basis: 50%;
+
+	display: flex;
+	justify-content: center;
+}
+
+form {
+	margin: 10px;
+	padding: 10px;
+
+	display: flex;
+	flex-direction: column;
+	flex-basis: 50%;
+}
+
+input {
+	margin: 0px 0px 10px 0px;
+	border: 1px solid Navy;
+}
+
+input::placeholder {
+	color: Gray;
+}
+
+button {
+	border: none;
+	background: Navy;
+	color: white;
+}
+
+button:hover {
+	background: MediumBlue;
+}
+
+#UD {
+	display: flex;
+	flex-direction: row;
+}
+
+.UDe {
+	margin: 5px;
+	flex-basis: 50%;
+}
+

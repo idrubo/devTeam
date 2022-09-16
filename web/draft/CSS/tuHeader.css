@@ -1,0 +1,54 @@
+body {
+	max-width: 1200px;
+	margin: auto;
+
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	margin: 10px 0px 0px 0px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+#Menu {
+	padding: 5px;
+
+	background-color: LightBlue;
+	font-family: Tahoma, Verdana, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+
+	display: flex;
+	flex-direction: row;
+}
+
+.Menu {
+	padding: 0px 10px 0px 5px;
+}
+
+a.Menu:link {
+	text-decoration: none;
+	color: Navy;
+}
+
+a.Menu:visited {
+	text-decoration: none;
+	color: Navy;
+}
+
+a.Menu:hover {
+	text-decoration: none;
+	background-color: Gold;
+}
+
+#AppName {
+	background-color: MidnightBlue;
+	color: BlanchedAlmond;
+
+	display: flex;
+	justify-content: center;
+}
+
