@@ -37,6 +37,8 @@ class TupdtController extends ApplicationController
 		$this->getRequest ();
 		$post = $this->_request->getAllParams ();
 
+		// $this->model->saveUser ($post);
+
 		/* DEBUG */ varToConsole ('post', $post);
 		/* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
 		/* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');

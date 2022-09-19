@@ -2,23 +2,29 @@
 
 class TupdtModel extends Model
 {
-	const jsonName = 'db.json';
-	const jsonDir  = ROOT_PATH . '/app/models/';
-	const jsonPath = TupdtModel::jsonDir . TupdtModel::jsonName;
+	private $userF;
+	private $taskF;
 
-	private $jsonF;
+	public function crtFile ($path)
+	{
+		try {
+			$jsonF = fopen ($path, "a+");
+			if (! $jsonF) {throw new Exception('File open failed.');}
+		}
+		catch (Exception $e) {echo "ERROR: $e";}
+
+		return $jsonF;
+	}
 
 	public function __construct ()
 	{
+		$jsonName = 'user.json';
+		$jsonDir  = ROOT_PATH . '/app/models/';
+		$jsonPath = $jsonDir . $jsonName;
 
-		/* DEBUG */ varToConsole ('jsonPath', TupdtModel::jsonPath);
+  		/* DEBUG */ varToConsole ('jsonPath', $jsonPath);
 
-		try {
-			$this->jsonF = fopen (TupdtModel::jsonPath, "a+");
-
-			if (! $this->jsonF) {throw new Exception('File open failed.');}
-		}
-		catch (Exception $e) {echo "ERROR: $e";}
+		$this->userF = $this->crtFile ($jsonPath);
 	}
 }
 ?>
