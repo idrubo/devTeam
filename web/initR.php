@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 date_default_timezone_set('CET');
 
 // defines the path to the files
-define('INCLUDE_PATH', realpath(dirname(__FILE__) . '/../../'));
+define('INCLUDE_PATH', realpath(dirname(__FILE__) . '/../'));
 
 /* For debugging: */ require INCLUDE_PATH . '/lib/debug/toConsole.php';
 /* DEBUG */ varToConsole ('INCLUDE_PATH', INCLUDE_PATH);
@@ -22,7 +22,7 @@ include(INCLUDE_PATH . '/config/routes.php');
  */
 function autoloader($className) {
 
-	$root_path = realpath(dirname(__FILE__) . '/../../');
+	$root_path = realpath(dirname(__FILE__) . '/../');
 	$cms_path = $root_path . '/lib/base/';
 
 	// controller autoloading

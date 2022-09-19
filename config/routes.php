@@ -10,28 +10,20 @@
  * '/calendar' => 'calendar#index'
  */
 
-$routes = array(
-	'/' => 'test#index');
-
-# $rIndex = array (
-#	'/draft/'     => 'draft#index',
-#	'/draft/index.php'     => 'draft#index'
-# );
-
 $rIndex = array (
-	'/draft/'     => 'draft#index'
+	'/'     => 'draft#index'
 );
 
 $rTask = array(
-	'/draft/task/' => 'draft#task');
+	'/task/' => 'draft#task');
 
 $rTaskUD = array(
-	'/draft/taskUD/' => 'draft#taskUD');
+	'/taskUD/' => 'draft#taskUD');
 
 $rList = array(
-	'/draft/list/' => 'draft#list');
+	'/list/' => 'draft#list');
 
 $rListV = array(
-	'/draft/listV/' => 'draft#listV');
+	'/listV/' => 'draft#listV');
 
 ?>
