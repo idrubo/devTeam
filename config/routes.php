@@ -11,19 +11,19 @@
  */
 
 $rIndex = array (
-	'/'     => 'draft#index'
+	'/'     => 'tupdt#index'
 );
 
 $rTask = array(
-	'/task/' => 'draft#task');
+	'/task/' => 'tupdt#task');
 
 $rTaskUD = array(
-	'/taskUD/' => 'draft#taskUD');
+	'/taskUD/' => 'tupdt#taskUD');
 
 $rList = array(
-	'/list/' => 'draft#list');
+	'/list/' => 'tupdt#list');
 
 $rListV = array(
-	'/listV/' => 'draft#listV');
+	'/listV/' => 'tupdt#listV');
 
 ?>

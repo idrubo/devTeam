@@ -1,20 +1,20 @@
 <?php
 
-class DraftModel extends Model
+class TupdtModel extends Model
 {
 	const jsonName = 'db.json';
 	const jsonDir  = ROOT_PATH . '/app/models/';
-	const jsonPath = DraftModel::jsonDir . DraftModel::jsonName;
+	const jsonPath = TupdtModel::jsonDir . TupdtModel::jsonName;
 
 	private $jsonF;
 
 	public function __construct ()
 	{
 
-		/* DEBUG */ varToConsole ('jsonPath', DraftModel::jsonPath);
+		/* DEBUG */ varToConsole ('jsonPath', TupdtModel::jsonPath);
 
 		try {
-			$this->jsonF = fopen (DraftModel::jsonPath, "a+");
+			$this->jsonF = fopen (TupdtModel::jsonPath, "a+");
 
 			if (! $this->jsonF) {throw new Exception('File open failed.');}
 		}

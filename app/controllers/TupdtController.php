@@ -1,12 +1,12 @@
 <?php
 
-class DraftController extends ApplicationController
+class TupdtController extends ApplicationController
 {
 	private $model;
 
 	public function __construct ()
 	{	
-		$this->model = new DraftModel ();
+		$this->model = new TupdtModel ();
 	}
 
 	// DEBUG
@@ -32,14 +32,14 @@ class DraftController extends ApplicationController
 
 	public function indexAction()
 	{
-		/* DEBUG */ msgToConsole ('Into: DraftController::indexAction');
+		/* DEBUG */ msgToConsole ('Into: TupdtController::indexAction');
 
 		$this->getRequest ();
 		$post = $this->_request->getAllParams ();
 
 		/* DEBUG */ varToConsole ('post', $post);
 		/* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
-		/* DEBUG */ msgToConsole ('Leaving: DraftController::indexAction');
+		/* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
 	}
 
 	public function taskAction()
