@@ -32,16 +32,25 @@ class TupdtController extends ApplicationController
 
 	public function indexAction()
 	{
-		/* DEBUG */ msgToConsole ('Into: TupdtController::indexAction');
+		// /* DEBUG */ msgToConsole ('Into: TupdtController::indexAction');
 
 		$this->getRequest ();
 		$post = $this->_request->getAllParams ();
 
-		// $this->model->saveUser ($post);
+		/* DEBUG */ varToConsole ('$post', $post);
 
-		/* DEBUG */ varToConsole ('post', $post);
-		/* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
-		/* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
+		/* DEBUG */
+		/* DEBUG */
+		/* DEBUG */
+		/* A post must be always validated. */
+		if (! empty($post)) $this->model->saveUser ($post);
+		/* DEBUG */
+		/* DEBUG */
+		/* DEBUG */
+
+		// /* DEBUG */ varToConsole ('post', $post);
+		// /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
+		// /* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
 	}
 
 	public function taskAction()

@@ -6,3 +6,10 @@ Required branches:
 2.- Dev - Merges
 3.- Features.
 
+Pending:
+---------
+
+1.- Default text on textboxes appear in a wrong style.
+2.- ".git" directory must NOT be copied to the WEB server data directory.
+3.- Form data validation.
+

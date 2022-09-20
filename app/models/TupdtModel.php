@@ -2,8 +2,27 @@
 
 class TupdtModel extends Model
 {
+	const jsonDir =  ROOT_PATH . '/app/models/';
+
+	const userN = 'user.json';
+	const userP = self::jsonDir . self::userN;
+
+	const taskN = 'task.json';
+	const taskP = self::jsonDir . self::taskN;
+
 	private $userF;
 	private $taskF;
+
+	public function __construct ()
+	{
+  		/* DEBUG */ varToConsole ('userN', self::userP);
+
+		$this->userF = $this->crtFile (self::userP);
+
+  		/* DEBUG */ varToConsole ('taskN', self::taskP);
+
+		$this->taskF = $this->crtFile (self::taskP);
+	}
 
 	public function crtFile ($path)
 	{
@@ -16,15 +35,11 @@ class TupdtModel extends Model
 		return $jsonF;
 	}
 
-	public function __construct ()
+	function saveUser ($post)
 	{
-		$jsonName = 'user.json';
-		$jsonDir  = ROOT_PATH . '/app/models/';
-		$jsonPath = $jsonDir . $jsonName;
+		/* DEBUG */ varToConsole ('json_encode ($post)', json_encode ($post));
 
-  		/* DEBUG */ varToConsole ('jsonPath', $jsonPath);
-
-		$this->userF = $this->crtFile ($jsonPath);
+		fwrite ($this->userF, json_encode ($post));
 	}
 }
 ?>

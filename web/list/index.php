@@ -7,12 +7,12 @@ define('WEB_ROOT', substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NA
 // defindes the path to the files
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../'));
 
-/* DEBUG */ varToConsole ('WEB_ROOT', WEB_ROOT);
-/* DEBUG */ varToConsole ('ROOT_PATH', ROOT_PATH);
+// /* DEBUG */ varToConsole ('WEB_ROOT', WEB_ROOT);
+// /* DEBUG */ varToConsole ('ROOT_PATH', ROOT_PATH);
 
 $router = new Router();
 
-/* DEBUG */ varToConsole ('routes', $rTask);
+// /* DEBUG */ varToConsole ('routes', $rTask);
 
 $router->execute($rList);
 
