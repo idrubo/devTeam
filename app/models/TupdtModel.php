@@ -37,6 +37,8 @@ class TupdtModel extends Model
 
 	function saveUser ($post)
 	{
+		/* DEBUG */ varToConsole ('$post', $post);
+		/* DEBUG */ varToConsole ('$post', $post);
 		/* DEBUG */ varToConsole ('json_encode ($post)', json_encode ($post));
 
 		fwrite ($this->userF, json_encode ($post));

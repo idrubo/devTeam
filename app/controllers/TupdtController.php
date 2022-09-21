@@ -37,8 +37,6 @@ class TupdtController extends ApplicationController
 		$this->getRequest ();
 		$post = $this->_request->getAllParams ();
 
-		/* DEBUG */ varToConsole ('$post', $post);
-
 		/* DEBUG */
 		/* DEBUG */
 		/* DEBUG */
@@ -48,8 +46,8 @@ class TupdtController extends ApplicationController
 		/* DEBUG */
 		/* DEBUG */
 
-		// /* DEBUG */ varToConsole ('post', $post);
-		// /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
+		/* DEBUG */ varToConsole ('post', $post);
+		/* DEBUG */ varToConsole ('gettype ($post)', gettype ($post));
 		// /* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
 	}
 
