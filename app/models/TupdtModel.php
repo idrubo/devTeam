@@ -2,46 +2,63 @@
 
 class TupdtModel extends Model
 {
-	const jsonDir =  ROOT_PATH . '/app/models/';
+	const jsonDir = ROOT_PATH . '/app/models/';
 
-	const userN = 'user.json';
-	const userP = self::jsonDir . self::userN;
+	const userF = 'user.json';
+	const taskF = 'task.json';
+	const userP = self::jsonDir . self::userF;
+	const taskP = self::jsonDir . self::taskF;
 
-	const taskN = 'task.json';
-	const taskP = self::jsonDir . self::taskN;
-
-	private $userF;
-	private $taskF;
-
-	public function __construct ()
-	{
-  		/* DEBUG */ varToConsole ('userN', self::userP);
-
-		$this->userF = $this->crtFile (self::userP);
-
-  		/* DEBUG */ varToConsole ('taskN', self::taskP);
-
-		$this->taskF = $this->crtFile (self::taskP);
-	}
+	/* DEBUG */
+	/*
+	 * Create a class that could create, open, read and write a file as it checks for errors.
+	 */
+	/* DEBUG */
 
 	public function crtFile ($path)
 	{
 		try {
-			$jsonF = fopen ($path, "a+");
+			$jsonF = fopen ($path, "w+");
 			if (! $jsonF) {throw new Exception('File open failed.');}
+
+			fwrite ($jsonF, '[]');
+			fclose ($jsonF);
 		}
 		catch (Exception $e) {echo "ERROR: $e";}
+	}
 
-		return $jsonF;
+	public function __construct ()
+	{
+		if (! file_exists (self::userP)) { $this->crtFile (self::userP); }
+
+		// /* DEBUG */ varToConsole ('self::userP', self::userP);
 	}
 
 	function saveUser ($post)
 	{
-		/* DEBUG */ varToConsole ('$post', $post);
-		/* DEBUG */ varToConsole ('$post', $post);
-		/* DEBUG */ varToConsole ('json_encode ($post)', json_encode ($post));
+		// 2.- Convert the array to an object.
+		//
+		$user = (object) $post;
+		/* DEBUG */ varToConsole ('$user', $user);
+		/* DEBUG */ varToConsole ('gettype ($user)', gettype ($user));
 
-		fwrite ($this->userF, json_encode ($post));
+		// 3.- Read the file as a PHP array.
+		//
+		$jsonF = fopen (self::userP, "r");
+		$jsonUsr = fgets ($jsonF);
+
+		echo "\n\$jsonUsr: " . $jsonUsr;
+
+		if (empty ($jsonUsr))  $jsonUsr = "[]";
+
+		echo "\n\$jsonUsr: " . $jsonUsr;
+		fclose ($jsonF);
+
+		$phpUsr = json_decode ($jsonUsr, true);
+		echo "\n\$phpUsr: "; var_dump ($phpUsr);
+
 	}
+
 }
 ?>
+

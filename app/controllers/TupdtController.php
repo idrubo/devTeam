@@ -21,9 +21,6 @@ class TupdtController extends ApplicationController
 	 * 3.- Pass the data, as an array, to the model. -->
 	 * 4.- Call a Model method for every operation.  -->
 	 *
-	 * 3.1.- Create an array with two elements: "worker" and "task".
-	 * Worker contains 
-	 *
 	 */
 
 	// DEBUG
@@ -37,17 +34,10 @@ class TupdtController extends ApplicationController
 		$this->getRequest ();
 		$post = $this->_request->getAllParams ();
 
-		/* DEBUG */
-		/* DEBUG */
-		/* DEBUG */
-		/* A post must be always validated. */
-		if (! empty($post)) $this->model->saveUser ($post);
-		/* DEBUG */
-		/* DEBUG */
-		/* DEBUG */
+		$this->model->saveUser ($post);
 
-		/* DEBUG */ varToConsole ('post', $post);
-		/* DEBUG */ varToConsole ('gettype ($post)', gettype ($post));
+		// /* DEBUG */ varToConsole ('post', $post);
+		// /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
 		// /* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
 	}
 
