@@ -1,64 +1,41 @@
 <?php
 
+require 'fsys.php';
+
 class TupdtModel extends Model
 {
-	const jsonDir = ROOT_PATH . '/app/models/';
-
-	const userF = 'user.json';
-	const taskF = 'task.json';
-	const userP = self::jsonDir . self::userF;
-	const taskP = self::jsonDir . self::taskF;
-
-	/* DEBUG */
-	/*
-	 * Create a class that could create, open, read and write a file as it checks for errors.
-	 */
-	/* DEBUG */
-
-	public function crtFile ($path)
-	{
-		try {
-			$jsonF = fopen ($path, "w+");
-			if (! $jsonF) {throw new Exception('File open failed.');}
-
-			fwrite ($jsonF, '[]');
-			fclose ($jsonF);
-		}
-		catch (Exception $e) {echo "ERROR: $e";}
-	}
-
 	public function __construct ()
 	{
-		if (! file_exists (self::userP)) { $this->crtFile (self::userP); }
+		if (! file_exists (fsys::userP)) { fsys::xCrt (fsys::userP); }
 
-		// /* DEBUG */ varToConsole ('self::userP', self::userP);
+		// /* DEBUG */ varToConsole ('fsys::userP', fsys::userP);
 	}
 
 	function saveUser ($post)
 	{
-		// 2.- Convert the array to an object.
-		//
+		// /* DEBUG */ msgToConsole ('Into saveUser.');
+
 		$user = (object) $post;
-		/* DEBUG */ varToConsole ('$user', $user);
-		/* DEBUG */ varToConsole ('gettype ($user)', gettype ($user));
 
-		// 3.- Read the file as a PHP array.
-		//
-		$jsonF = fopen (self::userP, "r");
-		$jsonUsr = fgets ($jsonF);
+		$jsonF = fSys::xOpen (fsys::userP, "r");
+		$jsonUsr = fSys::xGets ($jsonF);
 
-		echo "\n\$jsonUsr: " . $jsonUsr;
+		// /* DEBUG */ varToConsole ('$jsonUsr', $jsonUsr);
 
-		if (empty ($jsonUsr))  $jsonUsr = "[]";
-
-		echo "\n\$jsonUsr: " . $jsonUsr;
 		fclose ($jsonF);
 
 		$phpUsr = json_decode ($jsonUsr, true);
-		echo "\n\$phpUsr: "; var_dump ($phpUsr);
 
+		array_push ($phpUsr, $user);
+
+		$jsonF = fSys::xOpen (fSys::userP, "w");
+		$jsonUsrs = json_encode ($phpUsr);
+
+		// /* DEBUG */ varToConsole ('$jsonUsrs', $jsonUsrs);
+
+		fSys::xWrite ($jsonF, $jsonUsrs);
+		fclose ($jsonF);
 	}
-
 }
 ?>
 

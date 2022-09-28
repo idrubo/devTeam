@@ -9,24 +9,6 @@ class TupdtController extends ApplicationController
 		$this->model = new TupdtModel ();
 	}
 
-	// DEBUG
-	// DEBUG
-	// DEBUG
-
-	/*
-	 * Need to:
-	 *
-	 * 1.- Define a Model.                           --> OK
-	 * 2.- Get an instance of our model.             --> OK
-	 * 3.- Pass the data, as an array, to the model. -->
-	 * 4.- Call a Model method for every operation.  -->
-	 *
-	 */
-
-	// DEBUG
-	// DEBUG
-	// DEBUG
-
 	public function indexAction()
 	{
 		// /* DEBUG */ msgToConsole ('Into: TupdtController::indexAction');
@@ -34,10 +16,17 @@ class TupdtController extends ApplicationController
 		$this->getRequest ();
 		$post = $this->_request->getAllParams ();
 
-		$this->model->saveUser ($post);
-
 		// /* DEBUG */ varToConsole ('post', $post);
 		// /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
+		// /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
+
+		if (! empty ($post))
+		{
+			$this->vData->vUser ($post);
+			$this->model->checkUser ($post);
+			$this->model->saveUser ($post);
+		}
+
 		// /* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
 	}
 
@@ -57,4 +46,5 @@ class TupdtController extends ApplicationController
 	{
 	}
 }
+
 ?>
