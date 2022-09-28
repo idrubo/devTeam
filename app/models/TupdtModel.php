@@ -11,7 +11,7 @@ class TupdtModel extends Model
 		// /* DEBUG */ varToConsole ('fsys::userP', fsys::userP);
 	}
 
-	function saveUser ($post)
+	public function saveUser ($post)
 	{
 		// /* DEBUG */ msgToConsole ('Into saveUser.');
 
@@ -26,15 +26,27 @@ class TupdtModel extends Model
 
 		$phpUsr = json_decode ($jsonUsr, true);
 
-		array_push ($phpUsr, $user);
+		if (! $this->checkItem ($phpUsr, 'user', $post ['user']))
+		{
+			array_push ($phpUsr, $user);
 
-		$jsonF = fSys::xOpen (fSys::userP, "w");
-		$jsonUsrs = json_encode ($phpUsr);
+			$jsonF = fSys::xOpen (fSys::userP, "w");
+			$jsonUsrs = json_encode ($phpUsr);
 
-		// /* DEBUG */ varToConsole ('$jsonUsrs', $jsonUsrs);
+			// /* DEBUG */ varToConsole ('$jsonUsrs', $jsonUsrs);
 
-		fSys::xWrite ($jsonF, $jsonUsrs);
-		fclose ($jsonF);
+			fSys::xWrite ($jsonF, $jsonUsrs);
+			fclose ($jsonF);
+		}
+	}
+
+	private function checkItem ($arr, $key, $str)
+	{
+		foreach ($arr as $v)
+			if (! strcasecmp ($v [$key], $str))
+				return true;
+
+		return false;
 	}
 }
 ?>
