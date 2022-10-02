@@ -6,41 +6,49 @@
 		<title>Developers Team</title>
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/x-icon" href="images/user-gear.svg">
-		<link rel="stylesheet" href="stylesheets/tuHeader.css">
-		<link rel="stylesheet" href="stylesheets/tuMainCr.css">
+		<link rel="stylesheet" href="stylesheets/tu.css">
 	</head>
 
-	<body>
+	 <body class="max-w-screen-xl m-auto flex flex-col">
 
-			<header>
-
+			<header class="mt-2.5 mr-0 mb-0 ml-0" >
 				<nav>
-					<div id="Menu">
-						<a class="Menu" href="/">User</a>
-						<a class="Menu" href="/task/">Task</a>
-						<a class="Menu" href="/list/">List</a>
+					<div class="p-1 bg-LightBlue Arial sans-serif text-base font-bold">
+						<a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/">User</a>
+						<a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/task/">Task</a>
+						<a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/list/">List</a>
 					</div>
 				</nav>
 
-				<div id="AppName"><h1 id="AppName">Task Updater</h1></div>
+				<div class="bg-MidnightBlue text-BlanchedAlmond flex justify-center">
+          <h1 class="p-1 text-4xl font-bold">Task Updater</h1>
+				</div>
 
 			</header>
 
-			<main>
+			<main class="pt-2.5 pr-1 pb-2.5 pl-2.5 bg-LightBlue text-Navy flex flex-col">
 
 				<div>
-					<h3>Create user</h3>
+					<h3 class="text-xl font-bold">Create user</h3>
 				</div>
 
-				<div id="Columns">
-					<div id="c1">
-						<form action="/" method="post">
-							<input type="text" name="user" placeholder="Full name">
-							<button type="submit">Create</button>
-						</form>
+				<div class="flex flex-row">
+					<div class="m-1 bg-BurlyWood basis-2/4 flex justify-center">
+
+            <div class="m-2.5 p-2.5 flex flex-column">
+  						<form action="/" method="post">
+                <div class="mt-0 mr-0 mb-2.5 ml-0 border-solid border-Navy placeholder:text-Gray"> 
+  	  						<input type="text" name="user" placeholder="Full name">
+			  				</div>
+                <div class="border border-none bg-Navy text-white text-center hover:bg-MediumBlue">
+  				  			<button type="submit">Create</button>
+                </div>
+						  </form>
+            </div>
+
 					</div>
 
-					<div id="c2">
+					<div class="m-1 bg-BurlyWood basis-2/4 flex invisible">
 					</div>
 
 				</div>
