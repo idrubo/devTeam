@@ -29,77 +29,90 @@
 			<main class="pt-2.5 pr-1 pb-2.5 pl-2.5 bg-LightBlue text-Navy flex flex-col">
 
 				<div class="flex flex-row">
-					<div class="m-1 basis-2/4 flex justify-start">        <h3>Create Task</h3></div>
-					<div class="m-1 basis-2/4 flex justify-start visible"><h3>Check Task</h3></div>
+					<div class="m-1 text-xl font-bold basis-2/4 flex justify-start">        <h3>Create Task</h3></div>
+					<div class="m-1 text-xl font-bold basis-2/4 flex justify-start visible"><h3>Check Task</h3></div>
 				</div>
 
-				<div class="flex flex-row">
-					<div class="m-1 bg-BurlyWood basis-2/4 flex justify-center">
-
+       <div class="flex flex-row">
+         <div class="m-1 bg-BurlyWood basis-2/4 flex justify-center">
            <div class="m-2.5 p-2.5 flex flex-column basis-2/4">
-							<form action="">
-                <div class="mt-0 mr-0 mb-2.5 ml-0 border-2 border-solid border-Navy">
+             <form action="">
+                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray">
                   <input type="text" name="user" placeholder="Full name">
                 </div>
-                <div class="mt-0 mr-0 mb-2.5 ml-0 border-2 border-solid border-Navy">
+                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray">
                     <input type="text" name="description" placeholder="Description">
                 </div>
-                <div class="mt-0 mr-0 mb-2.5 ml-0 border-2 border-solid border-Navy">
+                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
                   <input type="datetime-local" name="dStart" placeholder="Start date">
                 </div>
-                <div class="mt-0 mr-0 mb-2.5 ml-0 border-2 border-solid border-Navy">
+                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
                     <input type="datetime-local" name="dFinish" placeholder="Finish date">
-                </div>
+		</div>
 
-	  						<div class="pt-0 pr-0 pb-1 pl-0 flex flex-row">
-									<div class"m-1 text-sm">
+                <div class="pt-0 pr-0 pb-1 pl-0 flex flex-row">
+                  <div class"m-1 text-sm">
                     <label for="Pending1">Pending</label>
-									  <input type="radio" name="Pending1" value="pending">
+                    <input type="radio" name="Pending1" value="pending" class="m-1">
                   </div>
-									<div class"m-1 text-sm">
-  						  		<label for="Running1">Running</label>
-	  				  			<input type="radio" name="Running1" value="running">
+                  <div class"m-1 text-sm">
+                    <label for="Running1">Running</label>
+                    <input type="radio" name="Running1" value="running" class="m-1">
                   </div>
-									<div class"m-1 text-sm">
-				  				  <label for="Finished1">Finished</label>
-			  					  <input type="radio" name="Finished1" value="finished">
+                    <div class"m-1 text-sm">
+                      <label for="Finished1">Finished</label>
+                      <input type="radio" name="Finished1" value="finished" class="m-1">
+                    </div>
                   </div>
-								</div>
 
-                <div class="border-none bg-Navy text-white text-center hover:bg-MediumBlue">
-  	  						<button type="submit" href="">Create</button>
-								</div>
-  						</form>
+                  <div class="border-none bg-Navy text-white text-center hover:bg-MediumBlue">
+  	            <button type="submit" href="">Create</button>
+                  </div>
+              </form>
             </div>
-					</div>
+          </div>
 
-					<div id="m-1 bg-BurlyWood basis-2/5 flex justify-center visible">
-<!--
-						<form action="">
-							<input type="text" name="user" placeholder="Full name">
-							<input type="text" name="description" placeholder="Description">
-							<input type="datetime-local" name="dStart" placeholder="Start date">
-							<input type="datetime-local" name="dFinish" placeholder="Finish date">
+          <div class="m-1 bg-BurlyWood basis-2/4 flex justify-center visible">
+             <div class="m-2.5 p-2.5 flex flex-column basis-2/4">
+               <form action="">
+                 <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray">
+                   <input type="text" name="user" placeholder="Full name">
+                 </div>
+                 <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray">
+                   <input type="text" name="description" placeholder="Description">
+                 </div>
+                 <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
+                   <input type="datetime-local" name="dStart" placeholder="Start date">
+                 </div>
+                 <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
+                   <input type="datetime-local" name="dFinish" placeholder="Finish date">
+		 </div>
 
-							<div class="cRadio">
-								<label for="Pending2">Pending</label>
-								<input type="radio" id="Pending2" class="cR" name="Pending2" value="pending">
-								<label for="Running2">Running</label>
-								<input type="radio" id="Running2" class="cR" name="Running2" value="running">
-								<label for="Finished2">Finished</label>
-								<input type="radio" id="Finished2" class="cR" name="Finished2" value="finished">
-							</div>
+                 <div class="pt-0 pr-0 pb-1 pl-0 flex flex-row">
+                   <div class"m-1 text-sm">
+                     <label for="Pending2">Pending</label>
+		     <input type="radio" name="Pending2" value="pending" class="m-1">
+                   </div>
+                   <div class"m-1 text-sm">
+                     <label for="Running2">Running</label>
+                     <input type="radio" name="Running2" value="running" class="m-1">
+                   </div>
+                   <div class"m-1 text-sm">
+                     <label for="Finished2">Finished</label>
+                     <input type="radio" name="Finished2" value="finished" class="m-1">
+                   </div>
+                 </div>
+                 <div class="border-none bg-Navy text-white text-center hover:bg-MediumBlue">
+		   <button type="submit" href="">Check</button>
+                 </div>
+               </form>
+             </div>
+           </div>
+         </div>
 
-							<button type="submit" href="">Check</button>
-						</form>
--->
-					</div>
+       </main>
 
-				</div>
-
-			</main>
-
-	</body>
+     </body>
 
 </html>
 

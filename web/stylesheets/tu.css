@@ -619,14 +619,6 @@ video {
   flex-basis: 50%;
 }
 
-.basis-3\/4 {
-  flex-basis: 75%;
-}
-
-.basis-2\/5 {
-  flex-basis: 40%;
-}
-
 .flex-row {
   flex-direction: row;
 }
@@ -643,12 +635,12 @@ video {
   justify-content: center;
 }
 
-.border {
-  border-width: 1px;
-}
-
 .border-2 {
   border-width: 2px;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .border-solid {
@@ -677,6 +669,11 @@ video {
 .bg-BurlyWood {
   --tw-bg-opacity: 1;
   background-color: rgb(222 184 135 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-Navy {
@@ -804,14 +801,14 @@ video {
           text-decoration-line: none;
 }
 
-.placeholder\:text-Gray::-moz-placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(128 128 128 / var(--tw-text-opacity));
+.placeholder-Gray::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(128 128 128 / var(--tw-placeholder-opacity));
 }
 
-.placeholder\:text-Gray::placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(128 128 128 / var(--tw-text-opacity));
+.placeholder-Gray::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(128 128 128 / var(--tw-placeholder-opacity));
 }
 
 .hover\:bg-Gold:hover {
