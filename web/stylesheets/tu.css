@@ -611,6 +611,10 @@ video {
   display: flex;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .max-w-screen-xl {
   max-width: 1280px;
 }
@@ -633,6 +637,10 @@ video {
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .border-2 {
@@ -751,6 +759,10 @@ video {
 
 .pl-0 {
   padding-left: 0px;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
 }
 
 .text-center {
