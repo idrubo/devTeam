@@ -2,6 +2,8 @@
 
 require 'vData.php';
 
+$GLOBALS ['usrErr'] = "";
+
 class TupdtController extends ApplicationController
 {
 	private $model;
@@ -13,7 +15,7 @@ class TupdtController extends ApplicationController
 		$this->valD  = new vData ();
 	}
 
-	public function indexAction()
+	public function indexAction ()
 	{
 		// /* DEBUG */ msgToConsole ('Into: TupdtController::indexAction');
 
@@ -25,27 +27,30 @@ class TupdtController extends ApplicationController
 		// /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
 
 		if (! empty ($post))
-			if ($this->valD->vUser ($post))
-				$this->model->saveUser ($post);
+		{
+			if ($this->valD->vUser ($post)) $this->model->saveUser ($post);
+			else $GLOBALS ['usrErr'] = "Empty !!!";
+		}
 
 		// /* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
 	}
 
-	public function taskAction()
+	public function taskAction ()
 	{
 	}
 
-	public function taskUDAction()
+	public function taskUDAction ()
 	{
 	}
 
-	public function listAction()
+	public function listAction ()
 	{
 	}
 
-	public function listVAction()
+	public function listVAction ()
 	{
 	}
 }
 
 ?>
+
