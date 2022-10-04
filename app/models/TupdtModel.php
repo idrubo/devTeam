@@ -6,27 +6,23 @@ class TupdtModel extends Model
 {
   public function __construct ()
   {
-    /* DEBUG */ msgToConsole ('Into TupdtModel::__construct.');
+    // /* DEBUG */ msgToConsole ('Into TupdtModel::__construct.');
     if (! file_exists (fsys::userP)) { fsys::xCrt (fsys::userP); }
     if (! file_exists (fsys::taskP)) { fsys::xCrt (fsys::taskP); }
 
-    /* DEBUG */ varToConsole ('fsys::userP', fsys::userP);
-    /* DEBUG */ varToConsole ('fsys::taskP', fsys::taskP);
-    /* DEBUG */ msgToConsole ('Leaving TupdtModel::__construct.');
+    // /* DEBUG */ varToConsole ('fsys::userP', fsys::userP);
+    // /* DEBUG */ varToConsole ('fsys::taskP', fsys::taskP);
+    // /* DEBUG */ msgToConsole ('Leaving TupdtModel::__construct.');
   }
 
   public function saveUser ($post)
   {
-    /* DEBUG */ msgToConsole ('Into TupdtModel::saveUser.');
+    // /* DEBUG */ msgToConsole ('Into TupdtModel::saveUser.');
 
     $user = (object) $post;
 
-    $jsonF = fSys::xOpen (fsys::userP, "r");
-    $jsonUsr = fSys::xGets ($jsonF);
-
-    /* DEBUG */ varToConsole ('+++$jsonUsr+++', $jsonUsr);
-
-    fclose ($jsonF);
+    $jsonUsr = fSys::jRead (fSys::userP);
+    // /* DEBUG */ varToConsole ('$jsonUsr', $jsonUsr);
 
     $phpUsr = json_decode ($jsonUsr, true);
 
@@ -35,15 +31,25 @@ class TupdtModel extends Model
       array_push ($phpUsr, $user);
       $jsonUsrs = json_encode ($phpUsr);
 
-      $jsonF = fSys::xOpen (fSys::userP, "w");
+      fSys::jWrite (fSys::userP, $jsonUsrs);
 
       // /* DEBUG */ varToConsole ('$jsonUsrs', $jsonUsrs);
-
-      fSys::xWrite ($jsonF, $jsonUsrs);
-      fclose ($jsonF);
     }
 
-    /* DEBUG */ msgToConsole ('Leaving TupdtModel::saveUser.');
+    // /* DEBUG */ msgToConsole ('Leaving TupdtModel::saveUser.');
+  }
+
+  public function checkUser ($user)
+  {
+    // /* DEBUG */ msgToConsole ('Into TupdtModel::checkUser.');
+
+    $jsonUsr = fSys::jRead (fSys::userP);
+
+    $phpUsr = json_decode ($jsonUsr, true);
+
+    return $this->checkItem ($phpUsr, 'user', $user ['user']);
+
+    // /* DEBUG */ msgToConsole ('Leaving TupdtModel::checkUser.');
   }
 
   public function saveTask ($post)
@@ -52,37 +58,20 @@ class TupdtModel extends Model
 
     $task = (object) $post;
 
-    $jsonF = fSys::xOpen (fsys::taskP, "r");
-    $jsonTsk = fSys::xGets ($jsonF);
+    $jsonTsk = fSys::jRead (fSys::taskP);
 
     /* DEBUG */ varToConsole ('$jsonTsk', $jsonTsk);
 
-    fclose ($jsonF);
-
     $phpTsk = json_decode ($jsonTsk, true);
 
-    /* DEBUG */
-    /* DEBUG */
-    /* DEBUG */
-    /* 
-     * Must check for 'user' and 'description'. For a task to be equal to another
-     * both fileds must be equal.
-     */
-    /* DEBUG */
-    /* DEBUG */
-    /* DEBUG */
-    if ((! $this->checkItem ($phpUsr, 'user', $post ['user'])) ||
-      (! $this->checkItem ($phpUsr, 'description', $post ['description'])))
+    if (! $this->checkDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']))
     {
       array_push ($phpTsk, $task);
       $jsonTsks = json_encode ($phpTsk);
 
-      $jsonF = fSys::xOpen (fSys::taskP, "w");
-
       /* DEBUG */ varToConsole ('$jsonTsks', $jsonTsks);
 
-      fSys::xWrite ($jsonF, $jsonTsks);
-      fclose ($jsonF);
+      fSys::jWrite (fSys::taskP, $jsonTsks);
     }
 
     /* DEBUG */ msgToConsole ('Leaving TupdtModel::saveTask.');
@@ -93,6 +82,16 @@ class TupdtModel extends Model
     foreach ($arr as $v)
       if (! strcasecmp ($v [$key], $str))
         return true;
+
+    return false;
+  }
+
+  private function checkDbl ($arr, $key1, $str1, $key2, $str2)
+  {
+    foreach ($arr as $v)
+      if (! strcasecmp ($v [$key1], $str1))
+        if (! strcasecmp ($v [$key2], $str2))
+          return true;
 
     return false;
   }

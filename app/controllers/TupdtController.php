@@ -38,18 +38,26 @@ class TupdtController extends ApplicationController
   public function taskAction ()
   {
     /* DEBUG */ msgToConsole ('Into: TupdtController::taskAction');
-    //
+
     $this->getRequest ();
     $post = $this->_request->getAllParams ();
 
     unset ($post ['task']);
     /* DEBUG */ varToConsole ('post', $post);
-    /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
-    /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
+    // /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
+    // /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
 
     if (! empty ($post))
       if ($this->valD->vTask ($post))
-        $this->model->saveTask ($post);
+      {
+        $user = array ('user' => $post ['user']);
+        /* DEBUG */ varToConsole ('$user', $user);
+
+        if ($this->model->checkUser ($user))
+          $this->model->saveTask ($post);
+        else
+          $this->valD->setUsrE ('Must exist !!!');
+      }
 
     /* DEBUG */ msgToConsole ('Leaving: TupdtController::taskAction');
   }

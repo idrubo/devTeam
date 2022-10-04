@@ -10,19 +10,19 @@
 
   <body class="max-w-screen-xl m-auto flex flex-col">
 
-			<header class="mt-2.5 mr-0 mb-0 ml-0" >
+    <header class="mt-2.5 mr-0 mb-0 ml-0" >
 
-  			<nav class="p-1 bg-LightBlue Arial sans-serif text-base font-bold">
-          <a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/">User</a>
-          <a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/task/">Task</a>
-          <a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/list/">List</a>
-        </nav>
+      <nav class="p-1 bg-LightBlue Arial sans-serif text-base font-bold">
+        <a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/">User</a>
+        <a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/task/">Task</a>
+        <a class="pt-0 pr-2.5 pb-0 pl-1 text-Navy no-underline hover:no-underline hover:bg-Gold" href="/list/">List</a>
+      </nav>
 
-				<div class="bg-MidnightBlue text-BlanchedAlmond flex justify-center">
-          <h1 class="p-1 text-4xl font-bold">Task Updater</h1>
-				</div>
+      <div class="bg-MidnightBlue text-BlanchedAlmond flex justify-center">
+        <h1 class="p-1 text-4xl font-bold">Task Updater</h1>
+      </div>
 
-			</header>
+    </header>
 
     <main class="pt-2.5 pr-1 pb-2.5 pl-2.5 bg-LightBlue text-Navy flex flex-col">
       <div class="flex flex-row">
@@ -41,7 +41,7 @@
                 <input type="text" name="description" placeholder="Description" class="w-full">
               </div>
               <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
-              <input type="datetime-local" name="dStart" placeholder="Start date" class="w-full">
+                <input type="datetime-local" name="dStart" placeholder="Start date" class="w-full">
               </div>
               <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
                 <input type="datetime-local" name="dFinish" placeholder="Finish date" class="w-full">
@@ -49,21 +49,21 @@
 
               <div class="pt-0 pr-0 pb-1 pl-0 flex flex-row">
                 <div class"m-1 text-sm">
-                  <label for="Pending1">Pending</label>
+                  <label>Pending</label>
                   <input type="radio" id="Pending1" name="Pending1" value="pending" class="m-1">
                 </div>
                 <div class"m-1 text-sm">
-                  <label for="Running1">Running</label>
+                  <label>Running</label>
                   <input type="radio" id="Running1" name="Running1" value="running" class="m-1">
                 </div>
                 <div class"m-1 text-sm">
-                  <label for="Finished1">Finished</label>
+                  <label>Finished</label>
                   <input type="radio" id="Finished1" name="Finished1" value="finished" class="m-1">
                 </div>
               </div>
 
               <div class="border-none bg-Navy text-white text-center hover:bg-MediumBlue">
-                <button type="submit" href="">Show list</button>
+                <button type="submit" class="w-full">Show list</button>
               </div>
 
             </form>
@@ -74,10 +74,10 @@
           <div class="m-2.5 p-2.5 flex flex-column">
             <form action="">
               <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray">
-		<input type="text" name="user" placeholder="Full name" class="w-full">
+                <input type="text" name="user" placeholder="Full name" class="w-full">
               </div>
               <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray">
-		<input type="text" name="description" placeholder="Description" class="w-full">
+                <input type="text" name="description" placeholder="Description" class="w-full">
               </div>
 
               <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
@@ -89,22 +89,22 @@
 
               <div class="pt-0 pr-0 pb-1 pl-0 flex flex-row">
                 <div class"m-1 text-sm">
-                  <label for="Pending2">Pending</label>
+                  <label>Pending</label>
                   <input type="radio" name="Pending2" value="pending" class="m-1">
-	        </div>
+                </div>
                 <div class"m-1 text-sm">
-                  <label for="Running2">Running</label>
+                  <label>Running</label>
                   <input type="radio" name="Running2" value="running" class="m-1">
-	        </div>
+                </div>
                 <div class"m-1 text-sm">
-                  <label for="Finished2">Finished</label>
+                  <label>Finished</label>
                   <input type="radio" name="Finished2" value="finished" class="m-1">
-	        </div>
-	      </div>
+                </div>
+              </div>
 
               <div class="border-none bg-Navy text-white text-center hover:bg-MediumBlue">
-	        <button type="submit" href="">Check</button>
-	      </div>
+                <button type="submit" class="w-full">Check</button>
+              </div>
 
             </form>
           </div>
