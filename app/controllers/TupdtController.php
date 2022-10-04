@@ -2,54 +2,69 @@
 
 require 'vData.php';
 
-$GLOBALS ['usrErr'] = "";
-
 class TupdtController extends ApplicationController
 {
-	private $model;
-	private $valD;
+  private $model;
+  private $valD;
 
-	public function __construct ()
-	{	
-		$this->model = new TupdtModel ();
-		$this->valD  = new vData ();
-	}
+  public function __construct ()
+  {	
+    $this->model = new TupdtModel ();
+    $this->valD  = new vData ();
+  }
 
-	public function indexAction ()
-	{
-		// /* DEBUG */ msgToConsole ('Into: TupdtController::indexAction');
+  public function indexAction ()
+  {
+    // /* DEBUG */ msgToConsole ('Into: TupdtController::indexAction');
 
-		$this->getRequest ();
-		$post = $this->_request->getAllParams ();
+    $this->getRequest ();
+    $post = $this->_request->getAllParams ();
 
-		// /* DEBUG */ varToConsole ('post', $post);
-		// /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
-		// /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
+    /* DEBUG */ varToConsole ('post', $post);
 
-		if (! empty ($post))
-		{
-			if ($this->valD->vUser ($post)) $this->model->saveUser ($post);
-			else $GLOBALS ['usrErr'] = "Empty !!!";
-		}
+    unset ($post ['create']);
 
-		// /* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
-	}
+    /* DEBUG */ varToConsole ('post', $post);
+    // /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
+    // /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
 
-	public function taskAction ()
-	{
-	}
+    if (! empty ($post))
+      if ($this->valD->vUser ($post))
+        $this->model->saveUser ($post);
 
-	public function taskUDAction ()
-	{
-	}
+    // /* DEBUG */ msgToConsole ('Leaving: TupdtController::indexAction');
+  }
 
-	public function listAction ()
-	{
-	}
+  public function taskAction ()
+  {
+    /* DEBUG */ msgToConsole ('Into: TupdtController::taskAction');
+    //
+    $this->getRequest ();
+    $post = $this->_request->getAllParams ();
 
-	public function listVAction ()
-	{
-	}
+    unset ($post ['task']);
+    /* DEBUG */ varToConsole ('post', $post);
+    /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
+    /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
+
+    if (! empty ($post))
+      if ($this->valD->vTask ($post))
+        $this->model->saveTask ($post);
+
+    /* DEBUG */ msgToConsole ('Leaving: TupdtController::taskAction');
+  }
+
+  public function taskUDAction ()
+  {
+  }
+
+  public function listAction ()
+  {
+  }
+
+  public function listVAction ()
+  {
+  }
 }
 
 ?>
