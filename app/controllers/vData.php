@@ -16,6 +16,9 @@ $GLOBALS ['ustErr'] = "";
 /* For delete task: */
 $GLOBALS ['dusErr'] = $GLOBALS ['ddeErr'] = "";
 
+/* For listing task: */
+$GLOBALS ['lusErr'] = $GLOBALS ['ldeErr'] = "";
+
 class vData
 {
   public function vUser ($post)
@@ -183,6 +186,34 @@ class vData
     return $r;
   }
 
+  public function vLisT ($post)
+  {
+    // /* DEBUG */ msgToConsole ('Into: vData::vLisT');
+    $r = true;
+
+    // /* DEBUG */ varToConsole ('post', $post);
+
+    $post ['user'] = trim ($post ['user']);
+
+    if (strlen ($post ['user']) > 20)
+    {
+      $GLOBALS ['lusErr'] = "Too long !!!";
+      return $r = false;
+    }
+
+    $post ['description'] = trim ($post ['description']);
+
+    if (strlen ($post ['description']) > 50)
+    {
+      $GLOBALS ['ldeErr'] = "Too long !!!";
+      return $r = false;
+    }
+
+    // /* DEBUG */ varToConsole ('$r', $r);
+    // /* DEBUG */ msgToConsole ('Leaving: vData::vData');
+    return $r;
+  }
+
   public function setUsrE ($msg) { $GLOBALS ['usrErr'] = $msg; }
 
   public function setUpdTE ($msg)
@@ -193,6 +224,11 @@ class vData
   public function setDelTE ($msg)
   {
     $GLOBALS ['dusErr'] = $GLOBALS ['ddeErr'] = $msg;
+  }
+
+  public function setLisTE ($msg)
+  {
+    $GLOBALS ['lusErr'] = $GLOBALS ['ldeErr'] = $msg;
   }
 
   private function isValidDate ($date)

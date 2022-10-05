@@ -123,11 +123,37 @@ class TupdtModel extends Model
     return false;
   }
 
+  public function listTask ($post)
+  {
+    /* DEBUG */ msgToConsole ('Into TupdtModel::listTask.');
+
+    $jsonTsk = fSys::jRead (fSys::taskP);
+
+    $phpTsk = json_decode ($jsonTsk, true);
+
+    if (($tasks = $this->getDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description'])) != false)
+      return array ($tasks);
+
+    return $phpTsk;
+
+    /* DEBUG */ msgToConsole ('Leaving TupdtModel::listTask.');
+  }
+
   private function checkItem ($arr, $key, $str)
   {
     foreach ($arr as $v)
       if (! strcasecmp ($v [$key], $str))
         return true;
+
+    return false;
+  }
+
+  private function getDbl ($arr, $key1, $str1, $key2, $str2)
+  {
+    foreach ($arr as $v)
+      if (! strcasecmp ($v [$key1], $str1))
+        if (! strcasecmp ($v [$key2], $str2))
+          return $v;
 
     return false;
   }
@@ -152,7 +178,7 @@ class TupdtModel extends Model
         if (! strcasecmp ($v [$key2], $str2))
         {
           unset ($arr [$i]);
-          $arr = array_values($arr);
+          $arr = array_values ($arr);
           return true;
         }
       $i++;
@@ -162,5 +188,6 @@ class TupdtModel extends Model
   }
 
 }
+
 ?>
 

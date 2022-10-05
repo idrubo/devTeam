@@ -2,6 +2,8 @@
 
 require 'vData.php';
 
+$GLOBALS ['listing'] = "";
+
 class TupdtController extends ApplicationController
 {
   private $model;
@@ -53,8 +55,32 @@ class TupdtController extends ApplicationController
 
   public function listAction ()
   {
-    // /* DEBUG */ msgToConsole ('Into: TupdtController::listAction');
-    // /* DEBUG */ msgToConsole ('Leaving: TupdtController::listAction');
+    /* DEBUG */ msgToConsole ('Into: TupdtController::listAction');
+
+    $this->getRequest ();
+    $post = $this->_request->getAllParams ();
+
+    if (! empty ($post))
+    {
+      unset ($post ['lstTask']);
+
+      if ($this->valD->vLisT ($post))
+        $tasks = $this->model->listTask ($post);
+
+      /* DEBUG */
+      /* DEBUG */
+      /* DEBUG */
+      /* Return an error if the task is NOT listed. */
+      /* A button "All Tasks" may be added. */
+      /* DEBUG */
+      /* DEBUG */
+      /* DEBUG */
+
+      /* DEBUG */ varToConsole ('$tasks', $tasks);
+
+      $this->showTask ($tasks);
+    }
+    /* DEBUG */ msgToConsole ('Leaving: TupdtController::listAction');
   }
 
   public function crtUser ($post)
@@ -123,6 +149,16 @@ class TupdtController extends ApplicationController
         $this->valD->setDelTE ('Not found !!!');
 
     /* DEBUG */ msgToConsole ('Leaving: TupdtController::delTask');
+  }
+
+  public function showTask ($tasks)
+  {
+    $GLOBALS ['listing'] = "";
+
+    foreach ($tasks as $t)
+      $GLOBALS ['listing'] .= "<br>" . json_encode ($t);
+
+    /* DEBUG */ varToConsole ('$GLOBALS [listing]', $GLOBALS ['listing']);
   }
 
 }

@@ -9,13 +9,15 @@ Required branches:
 Pending:
 ---------
 
-1.- Treat data fields as text and add a placeholder for it.
+1.- Declare auxiliary functions on TupdtControler.php as private !!!???
 
 Manual:
 --------
 
 1.- A task is identified by the unique combination of user and a task description.
 2.- A user must be created before it can be assigned a task.
+3.- To list a task enter the user and description for the task, leaving the
+form empty will list all tasks.
 
 Testing:
 ---------
@@ -30,4 +32,8 @@ Testing:
 
 4.- Task updating.
 4.1.- Task is only updated if it already exists.
+
+5.- List task.
+5.1.- Check a single task is listed.
+5.2.- Check all tasks are listed.
 
