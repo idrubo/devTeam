@@ -1,6 +1,10 @@
 <?php
 
-$GLOBALS ['usrErr'] = $GLOBALS ['desErr'] = "";
+/* For create user: */
+$GLOBALS ['usrErr'] = "";
+
+/* For create task: */
+$GLOBALS ['tusErr'] = $GLOBALS ['desErr'] = "";
 $GLOBALS ['dstErr'] = $GLOBALS ['dfiErr'] = "";
 $GLOBALS ['staErr'] = "";
 
@@ -18,14 +22,14 @@ class vData
 
   public function vTask ($post)
   {
-    // /* DEBUG */ msgToConsole ('Into: vData::vTask');
+    /* DEBUG */ msgToConsole ('Into: vData::vTask');
     $r = true;
 
-    // /* DEBUG */ varToConsole ('post', $post);
+    /* DEBUG */ varToConsole ('post', $post);
 
     if (empty ($post ['user'] = trim ($post ['user'])))
     {
-      $GLOBALS ['usrErr'] = "Empty !";
+      $GLOBALS ['tusErr'] = "Empty !";
       $r = false;
     }
 
@@ -35,17 +39,19 @@ class vData
       $r = false;
     }
 
-    if (! $this->isValidDate ($post ['dStart']))
-    {
-      $GLOBALS ['dstErr'] = "Invalid !";
-      $r = false;
-    }
+    if (! empty ($post ['dStart'] = trim ($post ['dStart'])))
+      if (! $this->isValidDate ($post ['dStart']))
+      {
+        $GLOBALS ['dstErr'] = "Invalid !";
+        $r = false;
+      }
 
-    if (! $this->isValidDate ($post ['dFinish']))
-    {
-      $GLOBALS ['dfiErr'] = "Invalid !";
-      $r = false;
-    }
+    if (! empty ($post ['dFinish'] = trim ($post ['dFinish'])))
+      if (! $this->isValidDate ($post ['dFinish']))
+      {
+        $GLOBALS ['dfiErr'] = "Invalid !";
+        $r = false;
+      }
 
     if (empty ($post ['status']))
     {
@@ -53,8 +59,9 @@ class vData
       $r = false;
     }
 
+    /* DEBUG */ varToConsole ('$r', $r);
+    /* DEBUG */ msgToConsole ('Leaving: vData::vTask');
     return $r;
-    // /* DEBUG */ msgToConsole ('Leaving: vData::vTask');
   }
 
   public function setUsrE ($msg) { $GLOBALS ['usrErr'] = $msg; }
@@ -70,5 +77,6 @@ class vData
   }
 
 }
+
 ?>
 

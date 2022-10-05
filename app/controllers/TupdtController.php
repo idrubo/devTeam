@@ -15,7 +15,7 @@ class TupdtController extends ApplicationController
 
   public function createAction ()
   {
-    // /* DEBUG */ msgToConsole ('Into: TupdtController::createAction');
+    /* DEBUG */ msgToConsole ('Into: TupdtController::createAction');
 
     $this->getRequest ();
     $post = $this->_request->getAllParams ();
@@ -29,7 +29,7 @@ class TupdtController extends ApplicationController
         $this->crtTask ($post);
     }
 
-    // /* DEBUG */ msgToConsole ('Leaving: TupdtController::createAction');
+    /* DEBUG */ msgToConsole ('Leaving: TupdtController::createAction');
   }
 
   public function UDAction ()
@@ -64,19 +64,19 @@ class TupdtController extends ApplicationController
 
   public function crtTask ($post)
   {
-    // /* DEBUG */ msgToConsole ('Into: TupdtController::crtTask');
+    /* DEBUG */ msgToConsole ('Into: TupdtController::crtTask');
 
-    // /* DEBUG */ varToConsole ('post', $post);
+    /* DEBUG */ varToConsole ('post', $post);
     unset ($post ['crtTask']);
 
-    // /* DEBUG */ varToConsole ('post', $post);
-    // /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
-    // /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
+    /* DEBUG */ varToConsole ('post', $post);
+    /* DEBUG */ varToConsole ('gettype (post)', gettype ($post));
+    /* DEBUG */ varToConsole ('empty ($post)', empty ($post));
 
     if ($this->valD->vTask ($post))
     {
       $user = array ('user' => $post ['user']);
-      // /* DEBUG */ varToConsole ('$user', $user);
+      /* DEBUG */ varToConsole ('$user', $user);
 
       if ($this->model->checkUser ($user))
         $this->model->saveTask ($post);
@@ -84,7 +84,7 @@ class TupdtController extends ApplicationController
         $this->valD->setUsrE ('Must exist !!!');
     }
 
-    // /* DEBUG */ msgToConsole ('Leaving: TupdtController::crtTask');
+    /* DEBUG */ msgToConsole ('Leaving: TupdtController::crtTask');
   }
 
 }
