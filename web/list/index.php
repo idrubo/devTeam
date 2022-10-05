@@ -12,7 +12,7 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../'));
 
 $router = new Router();
 
-// /* DEBUG */ varToConsole ('routes', $rTask);
+// /* DEBUG */ varToConsole ('routes', $rList);
 
 $router->execute($rList);
 

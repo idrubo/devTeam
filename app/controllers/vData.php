@@ -18,10 +18,10 @@ class vData
 
   public function vTask ($post)
   {
-    /* DEBUG */ msgToConsole ('Into: vData::vTask');
+    // /* DEBUG */ msgToConsole ('Into: vData::vTask');
     $r = true;
 
-    /* DEBUG */ varToConsole ('post', $post);
+    // /* DEBUG */ varToConsole ('post', $post);
 
     if (empty ($post ['user'] = trim ($post ['user'])))
     {
@@ -54,7 +54,7 @@ class vData
     }
 
     return $r;
-    /* DEBUG */ msgToConsole ('Leaving: vData::vTask');
+    // /* DEBUG */ msgToConsole ('Leaving: vData::vTask');
   }
 
   public function setUsrE ($msg) { $GLOBALS ['usrErr'] = $msg; }

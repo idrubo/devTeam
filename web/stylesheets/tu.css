@@ -555,10 +555,6 @@ video {
   visibility: visible;
 }
 
-.invisible {
-  visibility: hidden;
-}
-
 .m-auto {
   margin: auto;
 }
@@ -637,10 +633,6 @@ video {
 
 .justify-center {
   justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
 }
 
 .border-2 {
@@ -759,10 +751,6 @@ video {
 
 .pl-0 {
   padding-left: 0px;
-}
-
-.pt-1 {
-  padding-top: 0.25rem;
 }
 
 .text-center {

@@ -3,7 +3,7 @@
 require '../initR.php';
 
 // defines the web root
-define('WEB_ROOT', substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], '/task/index.php')));
+define('WEB_ROOT', substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], '/create/index.php')));
 // defindes the path to the files
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../'));
 
@@ -12,8 +12,8 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../'));
 
 $router = new Router();
 
-// /* DEBUG */ varToConsole ('routes', $rTask);
+// /* DEBUG */ varToConsole ('routes', $rCreate);
 
-$router->execute($rTask);
+$router->execute($rCreate);
 
 ?>

@@ -58,6 +58,7 @@ class Controller
 		$this->_action = $action;
 		
 		// /* DEBUG */ varToConsole ('action', $action);
+		// /* DEBUG */ var_dump ($action);
 
 		// initializes the controller
 		$this->init();

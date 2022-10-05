@@ -54,13 +54,13 @@ class TupdtModel extends Model
 
   public function saveTask ($post)
   {
-    /* DEBUG */ msgToConsole ('Into TupdtModel::saveTask.');
+    // /* DEBUG */ msgToConsole ('Into TupdtModel::saveTask.');
 
     $task = (object) $post;
 
     $jsonTsk = fSys::jRead (fSys::taskP);
 
-    /* DEBUG */ varToConsole ('$jsonTsk', $jsonTsk);
+    // /* DEBUG */ varToConsole ('$jsonTsk', $jsonTsk);
 
     $phpTsk = json_decode ($jsonTsk, true);
 
@@ -69,12 +69,12 @@ class TupdtModel extends Model
       array_push ($phpTsk, $task);
       $jsonTsks = json_encode ($phpTsk);
 
-      /* DEBUG */ varToConsole ('$jsonTsks', $jsonTsks);
+      // /* DEBUG */ varToConsole ('$jsonTsks', $jsonTsks);
 
       fSys::jWrite (fSys::taskP, $jsonTsks);
     }
 
-    /* DEBUG */ msgToConsole ('Leaving TupdtModel::saveTask.');
+    // /* DEBUG */ msgToConsole ('Leaving TupdtModel::saveTask.');
   }
 
   private function checkItem ($arr, $key, $str)
