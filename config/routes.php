@@ -10,20 +10,15 @@
  * '/calendar' => 'calendar#index'
  */
 
+// $rIndex = array (
+//   '/'     => 'tupdt#index'
+// );
+
 $rIndex = array (
-	'/'     => 'tupdt#index'
+  '/create/' => 'tupdt#create',
+  '/UD/'     => 'tupdt#UD',
+  '/list/'   => 'tupdt#list'
 );
 
-$rTask = array(
-	'/task/' => 'tupdt#task');
-
-$rTaskUD = array(
-	'/taskUD/' => 'tupdt#taskUD');
-
-$rList = array(
-	'/list/' => 'tupdt#list');
-
-$rListV = array(
-	'/listV/' => 'tupdt#listV');
-
 ?>
+

@@ -34,8 +34,8 @@
 <!-- Labels -->
 
       <div class="flex flex-row">
-        <div class="m-1 text-xl font-bold basis-2/4 flex justify-start">        <h3>Create Task</h3></div>
-        <div class="m-1 text-xl font-bold basis-2/4 flex justify-start visible"><h3>Check Task</h3></div>
+        <div class="m-1 text-xl font-bold basis-2/4 flex justify-start">        <h3>Create User</h3></div>
+        <div class="m-1 text-xl font-bold basis-2/4 flex justify-start visible"><h3>Create Task</h3></div>
       </div>
 
 <!-- Labels -->
@@ -47,12 +47,12 @@
         <div class="m-1 bg-BurlyWood basis-2/4 flex justify-center">
           <div class="m-2.5 p-2.5 flex flex-column">
 
-            <form action="">
+            <form action="/create/" method="post">
 
 <!-- Text input 1 --->
 
-              <div class="flex flex-row justify-start"> 
-                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray">
+              <div class="flex flex-row"> 
+                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray"> 
                   <input type="text" name="user" placeholder="Full name" class="w-full">
                 </div>
                 <div class="pt-0 pr-0 pb-0 pl-1 text-red-500 font-bold">
@@ -60,69 +60,17 @@
                 </div>
               </div>
 
-              <div class="flex flex-row justify-start"> 
-                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy placeholder-Gray">
-                  <input type="text" name="description" placeholder="Description" class="w-full">
-                </div>
-                <div class="pt-0 pr-0 pb-0 pl-1 text-red-500 font-bold">
-                  <?php echo $GLOBALS ['desErr']; ?>
-                </div>
-              </div>
-
-              <div class="flex flex-row justify-start"> 
-                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
-                  <input type="datetime-local" name="dStart" placeholder="Start date" class="w-full">
-                </div>
-                <div class="pt-0 pr-0 pb-0 pl-1 text-red-500 font-bold">
-                  <?php echo $GLOBALS ['dstErr']; ?>
-                </div>
-              </div>
-
-              <div class="flex flex-row justify-start"> 
-                <div class="mt-0 mr-0 mb-2.5 ml-0 bg-white border-2 border-solid border-Navy">
-                  <input type="datetime-local" name="dFinish" placeholder="Finish date" class="w-full">
-                </div>
-                <div class="pt-0 pr-0 pb-0 pl-1 text-red-500 font-bold">
-                  <?php echo $GLOBALS ['dfiErr']; ?>
-                </div>
-              </div>
-
 <!-- Text input 1 --->
-
-<!-- Radio buttons 1 --->
-
-              <div class="flex flex-row justify-start"> 
-                <div class="pt-0 pr-0 pb-1 pl-0 flex flex-row">
-                  <div class"m-1 text-sm">
-                    <label>Pending</label>
-                    <input type="radio" name="status" value="pending" class="m-1">
-                  </div>
-                  <div class"m-1 text-sm">
-                    <label>Running</label>
-                    <input type="radio" name="status" value="running" class="m-1">
-                  </div>
-                  <div class"m-1 text-sm">
-                    <label>Finished</label>
-                    <input type="radio" name="status" value="finished" class="m-1">
-                  </div>
-                </div>
-                <div class="pt-0 pr-0 pb-0 pl-1 text-red-500 font-bold">
-                  <?php echo $GLOBALS ['staErr']; ?>
-                </div>
-              </div>
-
-<!-- Radio buttons 1 --->
 
 <!-- Submit button 1 --->
 
-              <div class="border-none bg-Navy text-white text-center hover:bg-MediumBlue">
-                <button type="submit" name="task" value="task" class="w-full">Create</button>
+              <div class="border border-none bg-Navy text-white text-center hover:bg-MediumBlue">
+                <button type="submit" name="crtUser" value="crtUser" class="w-full">Create User</button>
               </div>
 
 <!-- Submit button 1 --->
 
             </form>
-
           </div>
         </div>
 
@@ -132,7 +80,7 @@
 
         <div class="m-1 bg-BurlyWood basis-2/4 flex justify-center visible">
           <div class="m-2.5 p-2.5 flex flex-column">
-            <form action="">
+            <form action="/create/">
 
 <!-- Text input 2 --->
 
@@ -173,11 +121,12 @@
 <!-- Submit button 2 --->
 
               <div class="border-none bg-Navy text-white text-center hover:bg-MediumBlue">
-                <button type="submit" class="w-full">Check</button>
+                <button type="submit" name="crtTask" value="crtTask" class="w-full">Create Task</button>
               </div>
-            </form>
 
 <!-- Submit button 2 --->
+
+            </form>
 
           </div>
         </div>
