@@ -10,6 +10,11 @@ Pending:
 ---------
 
 1.- Declare auxiliary functions on TupdtControler.php as private !!!???
+2.- There should be example json files at:
+app/models/user.json and app/models/task.json
+3.- Define date format at the manual.
+4.- Improve listing look
+5.- Add a button to list all tasks.
 
 Manual:
 --------
@@ -18,6 +23,9 @@ Manual:
 2.- A user must be created before it can be assigned a task.
 3.- To list a task enter the user and description for the task, leaving the
 form empty will list all tasks.
+4.- There should be example json files at:
+app/models/user.json and app/models/task.json
+5.- Properly define date format.
 
 Testing:
 ---------
