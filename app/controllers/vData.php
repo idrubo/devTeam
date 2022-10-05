@@ -8,24 +8,41 @@ $GLOBALS ['tusErr'] = $GLOBALS ['desErr'] = "";
 $GLOBALS ['dstErr'] = $GLOBALS ['dfiErr'] = "";
 $GLOBALS ['staErr'] = "";
 
+/* For update task: */
+$GLOBALS ['uusErr'] = $GLOBALS ['udeErr'] = "";
+$GLOBALS ['udsErr'] = $GLOBALS ['udfErr'] = "";
+$GLOBALS ['ustErr'] = "";
+
+/* For delete task: */
+$GLOBALS ['dusErr'] = $GLOBALS ['ddeErr'] = "";
+
 class vData
 {
   public function vUser ($post)
   {
-    if (empty ($post = trim ($post ['user'])))
+    $r = true;
+
+    if (empty ($post ['user'] = trim ($post ['user'])))
     {
       $GLOBALS ['usrErr'] = "Empty !!!";
-      return false;
+      return $r = false;
     }
-    return true;
+
+    if (strlen ($post ['user']) > 20)
+    {
+      $GLOBALS ['usrErr'] = "Too long !!!";
+      return $r = false;
+    }
+
+    return $r;
   }
 
   public function vTask ($post)
   {
-    /* DEBUG */ msgToConsole ('Into: vData::vTask');
+    // /* DEBUG */ msgToConsole ('Into: vData::vTask');
     $r = true;
 
-    /* DEBUG */ varToConsole ('post', $post);
+    // /* DEBUG */ varToConsole ('post', $post);
 
     if (empty ($post ['user'] = trim ($post ['user'])))
     {
@@ -33,10 +50,22 @@ class vData
       $r = false;
     }
 
+    if (strlen ($post ['user']) > 20)
+    {
+      $GLOBALS ['usrErr'] = "Too long !!!";
+      return $r = false;
+    }
+
     if (empty ($post ['description'] = trim ($post ['description'])))
     {
       $GLOBALS ['desErr'] = "Empty !";
       $r = false;
+    }
+
+    if (strlen ($post ['description']) > 50)
+    {
+      $GLOBALS ['desErr'] = "Too long !!!";
+      return $r = false;
     }
 
     if (! empty ($post ['dStart'] = trim ($post ['dStart'])))
@@ -59,12 +88,112 @@ class vData
       $r = false;
     }
 
-    /* DEBUG */ varToConsole ('$r', $r);
-    /* DEBUG */ msgToConsole ('Leaving: vData::vTask');
+    return $r;
+  }
+
+  public function vUpdT ($post)
+  {
+    // /* DEBUG */ msgToConsole ('Into: vData::vUpdT');
+    $r = true;
+
+    // /* DEBUG */ varToConsole ('post', $post);
+
+    if (empty ($post ['user'] = trim ($post ['user'])))
+    {
+      $GLOBALS ['uusErr'] = "Empty !";
+      $r = false;
+    }
+
+    if (strlen ($post ['user']) > 20)
+    {
+      $GLOBALS ['uusErr'] = "Too long !!!";
+      return $r = false;
+    }
+
+    if (empty ($post ['description'] = trim ($post ['description'])))
+    {
+      $GLOBALS ['udeErr'] = "Empty !";
+      $r = false;
+    }
+
+    if (strlen ($post ['description']) > 50)
+    {
+      $GLOBALS ['udeErr'] = "Too long !!!";
+      return $r = false;
+    }
+
+    if (! empty ($post ['dStart'] = trim ($post ['dStart'])))
+      if (! $this->isValidDate ($post ['dStart']))
+      {
+        $GLOBALS ['udsErr'] = "Invalid !";
+        $r = false;
+      }
+
+    if (! empty ($post ['dFinish'] = trim ($post ['dFinish'])))
+      if (! $this->isValidDate ($post ['dFinish']))
+      {
+        $GLOBALS ['udfErr'] = "Invalid !";
+        $r = false;
+      }
+
+    if (empty ($post ['status']))
+    {
+      $GLOBALS ['ustErr'] = "Empty !";
+      $r = false;
+    }
+
+    // /* DEBUG */ varToConsole ('$r', $r);
+    // /* DEBUG */ msgToConsole ('Leaving: vData::vUpdT');
+    return $r;
+  }
+
+  public function vDelT ($post)
+  {
+    // /* DEBUG */ msgToConsole ('Into: vData::vDelT');
+    $r = true;
+
+    // /* DEBUG */ varToConsole ('post', $post);
+
+    if (empty ($post ['user'] = trim ($post ['user'])))
+    {
+      $GLOBALS ['dusErr'] = "Empty !";
+      $r = false;
+    }
+
+    if (strlen ($post ['user']) > 20)
+    {
+      $GLOBALS ['dusErr'] = "Too long !!!";
+      return $r = false;
+    }
+
+    if (empty ($post ['description'] = trim ($post ['description'])))
+    {
+      $GLOBALS ['ddeErr'] = "Empty !";
+      $r = false;
+    }
+
+    if (strlen ($post ['description']) > 50)
+    {
+      $GLOBALS ['ddeErr'] = "Too long !!!";
+      return $r = false;
+    }
+
+    // /* DEBUG */ varToConsole ('$r', $r);
+    // /* DEBUG */ msgToConsole ('Leaving: vData::vData');
     return $r;
   }
 
   public function setUsrE ($msg) { $GLOBALS ['usrErr'] = $msg; }
+
+  public function setUpdTE ($msg)
+  {
+    $GLOBALS ['uusErr'] = $GLOBALS ['udeErr'] = $msg;
+  }
+
+  public function setDelTE ($msg)
+  {
+    $GLOBALS ['dusErr'] = $GLOBALS ['ddeErr'] = $msg;
+  }
 
   private function isValidDate ($date)
   {

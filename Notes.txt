@@ -9,3 +9,25 @@ Required branches:
 Pending:
 ---------
 
+1.- Treat data fields as text and add a placeholder for it.
+
+Manual:
+--------
+
+1.- A task is identified by the unique combination of user and a task description.
+2.- A user must be created before it can be assigned a task.
+
+Testing:
+---------
+
+1.- Validation for all forms.
+
+2.- User creation.
+2.1.- The task can not be created if the user doesn't exist.
+
+3.- Task creation.
+3.1.- The tast is not created if already exists.
+
+4.- Task updating.
+4.1.- Task is only updated if it already exists.
+

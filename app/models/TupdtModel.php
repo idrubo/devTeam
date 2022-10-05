@@ -77,6 +77,52 @@ class TupdtModel extends Model
     // /* DEBUG */ msgToConsole ('Leaving TupdtModel::saveTask.');
   }
 
+  public function updateTask ($post)
+  {
+    /* DEBUG */ msgToConsole ('Into TupdtModel::updateTask.');
+
+    $task = (object) $post;
+
+    $jsonTsk = fSys::jRead (fSys::taskP);
+
+    $phpTsk = json_decode ($jsonTsk, true);
+
+    if ($this->delDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']))
+    {
+      array_push ($phpTsk, (object) $task);
+      $jsonTsks = json_encode ($phpTsk);
+
+      fSys::jWrite (fSys::taskP, $jsonTsks);
+
+      return true;
+    }
+
+    /* DEBUG */ msgToConsole ('Leaving TupdtModel::updateTask.');
+
+    return false;
+  }
+
+  public function deleteTask ($post)
+  {
+    /* DEBUG */ msgToConsole ('Into TupdtModel::deleteTask.');
+
+    $jsonTsk = fSys::jRead (fSys::taskP);
+
+    $phpTsk = json_decode ($jsonTsk, true);
+
+    if ($this->delDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']))
+    {
+      $jsonTsks = json_encode ($phpTsk);
+
+      fSys::jWrite (fSys::taskP, $jsonTsks);
+
+      return true;
+    }
+
+    /* DEBUG */ msgToConsole ('Leaving TupdtModel::deleteTask.');
+    return false;
+  }
+
   private function checkItem ($arr, $key, $str)
   {
     foreach ($arr as $v)
@@ -95,6 +141,26 @@ class TupdtModel extends Model
 
     return false;
   }
+
+  private function delDbl (&$arr, $key1, $str1, $key2, $str2)
+  {
+    $i = 0;
+
+    foreach ($arr as $v)
+    {
+      if (! strcasecmp ($v [$key1], $str1))
+        if (! strcasecmp ($v [$key2], $str2))
+        {
+          unset ($arr [$i]);
+          $arr = array_values($arr);
+          return true;
+        }
+      $i++;
+    }
+
+    return false;
+  }
+
 }
 ?>
 
