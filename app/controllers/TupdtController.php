@@ -70,7 +70,7 @@ class TupdtController extends ApplicationController
 
   }
 
-  public function crtUser ($post)
+  private function crtUser ($post)
   {
 
     unset ($post ['crtUser']);
@@ -81,7 +81,7 @@ class TupdtController extends ApplicationController
 
   }
 
-  public function crtTask ($post)
+  private function crtTask ($post)
   {
 
     unset ($post ['crtTask']);
@@ -99,7 +99,7 @@ class TupdtController extends ApplicationController
 
   }
 
-  public function updtTask ($post)
+  private function updtTask ($post)
   {
 
     unset ($post ['update']);
@@ -110,7 +110,7 @@ class TupdtController extends ApplicationController
 
   }
 
-  public function delTask($post)
+  private function delTask($post)
   {
 
     unset ($post ['delete']);
@@ -121,7 +121,7 @@ class TupdtController extends ApplicationController
 
   }
 
-  public function lstTask ($post)
+  private function lstTask ($post)
   {
     unset ($post ['lstTask']);
 
@@ -136,7 +136,7 @@ class TupdtController extends ApplicationController
 
   }
 
-  public function lstAll ($post)
+  private function lstAll ($post)
   {
     unset ($post ['lstAll']);
 

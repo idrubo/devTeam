@@ -9,8 +9,6 @@ Required branches:
 Pending:
 ---------
 
-1.- Declare auxiliary functions on TupdtControler.php as private !!!???
-
 Manual:
 --------
 
