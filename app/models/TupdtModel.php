@@ -1,6 +1,6 @@
 <?php
 
-require 'fsys.php';
+require INCLUDE_PATH . '/app/models/fsys.php';
 
 class TupdtModel extends Model
 {
@@ -131,12 +131,25 @@ class TupdtModel extends Model
 
     $phpTsk = json_decode ($jsonTsk, true);
 
-    if (($tasks = $this->getDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description'])) != false)
-      return array ($tasks);
+    $tasks = $this->getDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']);
+
+    if ($tasks !== false) return array ($tasks);
+    else                  return false;
+
+    /* DEBUG */ msgToConsole ('Leaving TupdtModel::listTask.');
+  }
+
+  public function listAll ($post)
+  {
+    /* DEBUG */ msgToConsole ('Into TupdtModel::listAll.');
+
+    $jsonTsk = fSys::jRead (fSys::taskP);
+
+    $phpTsk = json_decode ($jsonTsk, true);
 
     return $phpTsk;
 
-    /* DEBUG */ msgToConsole ('Leaving TupdtModel::listTask.');
+    /* DEBUG */ msgToConsole ('Leaving TupdtModel::listAll.');
   }
 
   private function checkItem ($arr, $key, $str)

@@ -1,6 +1,8 @@
 <?php
 
-require 'vData.php';
+require INCLUDE_PATH . '/app/controllers/vData.php';
+require INCLUDE_PATH . '/app/views/scripts/tupdt/view.php';
+
 
 $GLOBALS ['listing'] = "";
 
@@ -8,11 +10,13 @@ class TupdtController extends ApplicationController
 {
   private $model;
   private $valD;
+  private $prnV;
 
   public function __construct ()
   {	
     $this->model = new TupdtModel ();
     $this->valD  = new vData ();
+    $this->prnV  = new prnV ();
   }
 
   public function createAction ()
@@ -62,24 +66,13 @@ class TupdtController extends ApplicationController
 
     if (! empty ($post))
     {
-      unset ($post ['lstTask']);
+      if (array_key_exists ('lstTask', $post))
+        $this->lstTask ($post);
 
-      if ($this->valD->vLisT ($post))
-        $tasks = $this->model->listTask ($post);
-
-      /* DEBUG */
-      /* DEBUG */
-      /* DEBUG */
-      /* Return an error if the task is NOT listed. */
-      /* A button "All Tasks" may be added. */
-      /* DEBUG */
-      /* DEBUG */
-      /* DEBUG */
-
-      /* DEBUG */ varToConsole ('$tasks', $tasks);
-
-      $this->showTask ($tasks);
+      if (array_key_exists ('lstAll', $post))
+        $this->lstAll ($post);
     }
+
     /* DEBUG */ msgToConsole ('Leaving: TupdtController::listAction');
   }
 
@@ -151,14 +144,31 @@ class TupdtController extends ApplicationController
     /* DEBUG */ msgToConsole ('Leaving: TupdtController::delTask');
   }
 
-  public function showTask ($tasks)
+  public function lstTask ($post)
   {
-    $GLOBALS ['listing'] = "";
+    unset ($post ['lstTask']);
 
-    foreach ($tasks as $t)
-      $GLOBALS ['listing'] .= "<br>" . json_encode ($t);
+    if ($this->valD->vLisT ($post))
+    {
+      if (($tasks = $this->model->listTask ($post)) !== false)
+        $this->prnV->showTasks ($tasks);
+      else
+        $this->valD->setLstTE ('NOT found !!!');
+    }
 
-    /* DEBUG */ varToConsole ('$GLOBALS [listing]', $GLOBALS ['listing']);
+    /* DEBUG */ varToConsole ('$tasks', $tasks);
+
+  }
+
+  public function lstAll ($post)
+  {
+    unset ($post ['lstAll']);
+
+    $tasks = $this->model->listAll ($post);
+
+    // /* DEBUG */ varToConsole ('$tasks', $tasks);
+
+    if (! count ($tasks) == 0) $this->prnV->showTasks ($tasks);
   }
 
 }

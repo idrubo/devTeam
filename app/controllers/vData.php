@@ -226,7 +226,7 @@ class vData
     $GLOBALS ['dusErr'] = $GLOBALS ['ddeErr'] = $msg;
   }
 
-  public function setLisTE ($msg)
+  public function setLstTE ($msg)
   {
     $GLOBALS ['lusErr'] = $GLOBALS ['ldeErr'] = $msg;
   }
