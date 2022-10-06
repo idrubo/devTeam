@@ -24,7 +24,6 @@ class prnV
 
     $GLOBALS ['listing'] .= "</table>";
 
-    // /* DEBUG */ varToConsole ('$GLOBALS [listing]', $GLOBALS ['listing']);
   }
 }
 

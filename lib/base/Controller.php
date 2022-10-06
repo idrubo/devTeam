@@ -31,7 +31,6 @@ class Controller
 	public function beforeFilters()
 	{
 
-		// /* DEBUG */ msgToConsole ('Layout disabled.');
 
 		$this->view->disableLayout();
 	}
@@ -52,13 +51,10 @@ class Controller
 	 */
 	public function execute($action = 'index')
 	{
-		// /* DEBUG */ msgToConsole ('Into: Controller::execute.');
 
 		// stores the current action
 		$this->_action = $action;
 		
-		// /* DEBUG */ varToConsole ('action', $action);
-		// /* DEBUG */ var_dump ($action);
 
 		// initializes the controller
 		$this->init();
@@ -69,7 +65,6 @@ class Controller
 		// adds the action suffix to the function to call
 		$actionToCall = $action.'Action';
 
-		// /* DEBUG */ varToConsole ('actionToCall', $actionToCall);
 		
 		// executes the action
 		$this->$actionToCall();
@@ -80,7 +75,6 @@ class Controller
 		// renders the view
 		$this->view->render($this->_getViewScript($action));
 
-		// /* DEBUG */ msgToConsole ('Leaving: Controller::execute.');
 }
 	
 	/**
@@ -91,7 +85,6 @@ class Controller
 	protected function _getViewScript($action)
 	{
 
-		// /* DEBUG */ msgToConsole ('Into: Controller::_getViewScript.');
 
 		// fetches the current controller executed
 		$controller = get_class($this);
@@ -99,8 +92,6 @@ class Controller
 		$script = strtolower(substr($controller, 0, -10) . '/' . $action . '.phtml');
 		// returns the script to render
 
-		// /* DEBUG */ varToConsole ('script', $script);
-		// /* DEBUG */ msgToConsole ('Leaving: Controller::_getViewScript.');
 
 		return $script;
 	}

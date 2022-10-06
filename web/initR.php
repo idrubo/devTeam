@@ -8,7 +8,6 @@ date_default_timezone_set('CET');
 define('INCLUDE_PATH', realpath(dirname(__FILE__) . '/../'));
 
 /* For debugging: */ require INCLUDE_PATH . '/lib/debug/toConsole.php';
-// /* DEBUG */ varToConsole ('INCLUDE_PATH', INCLUDE_PATH);
 
 // starts the session
 session_start();

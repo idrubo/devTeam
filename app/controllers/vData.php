@@ -42,10 +42,8 @@ class vData
 
   public function vTask ($post)
   {
-    // /* DEBUG */ msgToConsole ('Into: vData::vTask');
     $r = true;
 
-    // /* DEBUG */ varToConsole ('post', $post);
 
     if (empty ($post ['user'] = trim ($post ['user'])))
     {
@@ -96,10 +94,8 @@ class vData
 
   public function vUpdT ($post)
   {
-    // /* DEBUG */ msgToConsole ('Into: vData::vUpdT');
     $r = true;
 
-    // /* DEBUG */ varToConsole ('post', $post);
 
     if (empty ($post ['user'] = trim ($post ['user'])))
     {
@@ -145,17 +141,13 @@ class vData
       $r = false;
     }
 
-    // /* DEBUG */ varToConsole ('$r', $r);
-    // /* DEBUG */ msgToConsole ('Leaving: vData::vUpdT');
     return $r;
   }
 
   public function vDelT ($post)
   {
-    // /* DEBUG */ msgToConsole ('Into: vData::vDelT');
     $r = true;
 
-    // /* DEBUG */ varToConsole ('post', $post);
 
     if (empty ($post ['user'] = trim ($post ['user'])))
     {
@@ -181,17 +173,13 @@ class vData
       return $r = false;
     }
 
-    // /* DEBUG */ varToConsole ('$r', $r);
-    // /* DEBUG */ msgToConsole ('Leaving: vData::vData');
     return $r;
   }
 
   public function vLisT ($post)
   {
-    // /* DEBUG */ msgToConsole ('Into: vData::vLisT');
     $r = true;
 
-    // /* DEBUG */ varToConsole ('post', $post);
 
     $post ['user'] = trim ($post ['user']);
 
@@ -209,8 +197,6 @@ class vData
       return $r = false;
     }
 
-    // /* DEBUG */ varToConsole ('$r', $r);
-    // /* DEBUG */ msgToConsole ('Leaving: vData::vData');
     return $r;
   }
 

@@ -6,23 +6,17 @@ class TupdtModel extends Model
 {
   public function __construct ()
   {
-    // /* DEBUG */ msgToConsole ('Into TupdtModel::__construct.');
     if (! file_exists (fsys::userP)) { fsys::xCrt (fsys::userP); }
     if (! file_exists (fsys::taskP)) { fsys::xCrt (fsys::taskP); }
 
-    // /* DEBUG */ varToConsole ('fsys::userP', fsys::userP);
-    // /* DEBUG */ varToConsole ('fsys::taskP', fsys::taskP);
-    // /* DEBUG */ msgToConsole ('Leaving TupdtModel::__construct.');
   }
 
   public function saveUser ($post)
   {
-    // /* DEBUG */ msgToConsole ('Into TupdtModel::saveUser.');
 
     $user = (object) $post;
 
     $jsonUsr = fSys::jRead (fSys::userP);
-    // /* DEBUG */ varToConsole ('$jsonUsr', $jsonUsr);
 
     $phpUsr = json_decode ($jsonUsr, true);
 
@@ -33,15 +27,12 @@ class TupdtModel extends Model
 
       fSys::jWrite (fSys::userP, $jsonUsrs);
 
-      // /* DEBUG */ varToConsole ('$jsonUsrs', $jsonUsrs);
     }
 
-    // /* DEBUG */ msgToConsole ('Leaving TupdtModel::saveUser.');
   }
 
   public function checkUser ($user)
   {
-    // /* DEBUG */ msgToConsole ('Into TupdtModel::checkUser.');
 
     $jsonUsr = fSys::jRead (fSys::userP);
 
@@ -49,18 +40,15 @@ class TupdtModel extends Model
 
     return $this->checkItem ($phpUsr, 'user', $user ['user']);
 
-    // /* DEBUG */ msgToConsole ('Leaving TupdtModel::checkUser.');
   }
 
   public function saveTask ($post)
   {
-    // /* DEBUG */ msgToConsole ('Into TupdtModel::saveTask.');
 
     $task = (object) $post;
 
     $jsonTsk = fSys::jRead (fSys::taskP);
 
-    // /* DEBUG */ varToConsole ('$jsonTsk', $jsonTsk);
 
     $phpTsk = json_decode ($jsonTsk, true);
 
@@ -69,17 +57,14 @@ class TupdtModel extends Model
       array_push ($phpTsk, $task);
       $jsonTsks = json_encode ($phpTsk);
 
-      // /* DEBUG */ varToConsole ('$jsonTsks', $jsonTsks);
 
       fSys::jWrite (fSys::taskP, $jsonTsks);
     }
 
-    // /* DEBUG */ msgToConsole ('Leaving TupdtModel::saveTask.');
   }
 
   public function updateTask ($post)
   {
-    /* DEBUG */ msgToConsole ('Into TupdtModel::updateTask.');
 
     $task = (object) $post;
 
@@ -97,14 +82,12 @@ class TupdtModel extends Model
       return true;
     }
 
-    /* DEBUG */ msgToConsole ('Leaving TupdtModel::updateTask.');
 
     return false;
   }
 
   public function deleteTask ($post)
   {
-    /* DEBUG */ msgToConsole ('Into TupdtModel::deleteTask.');
 
     $jsonTsk = fSys::jRead (fSys::taskP);
 
@@ -119,13 +102,11 @@ class TupdtModel extends Model
       return true;
     }
 
-    /* DEBUG */ msgToConsole ('Leaving TupdtModel::deleteTask.');
     return false;
   }
 
   public function listTask ($post)
   {
-    /* DEBUG */ msgToConsole ('Into TupdtModel::listTask.');
 
     $jsonTsk = fSys::jRead (fSys::taskP);
 
@@ -136,12 +117,10 @@ class TupdtModel extends Model
     if ($tasks !== false) return array ($tasks);
     else                  return false;
 
-    /* DEBUG */ msgToConsole ('Leaving TupdtModel::listTask.');
   }
 
   public function listAll ($post)
   {
-    /* DEBUG */ msgToConsole ('Into TupdtModel::listAll.');
 
     $jsonTsk = fSys::jRead (fSys::taskP);
 
@@ -149,7 +128,6 @@ class TupdtModel extends Model
 
     return $phpTsk;
 
-    /* DEBUG */ msgToConsole ('Leaving TupdtModel::listAll.');
   }
 
   private function checkItem ($arr, $key, $str)

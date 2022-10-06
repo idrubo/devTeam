@@ -13,14 +13,8 @@ class View
 	
 	protected $_viewEnabled = true;
 
-	// /* DEBUG */
-	// /* DEBUG */
-	// /* DEBUG */
 	protected $_layoutEnabled = true;
 	// protected $_layoutEnabled = false;
-	// /* DEBUG */
-	// /* DEBUG */
-	// /* DEBUG */
 	
 	// initializes the data array
 	protected $_data = array();
@@ -44,7 +38,6 @@ class View
 		
 		// includes the view script
 
-		// /* DEBUG */ varToConsole ('viewScript', $viewScript);
 
 		include(ROOT_PATH . '/app/views/scripts/' . $viewScript);
 		
@@ -66,7 +59,6 @@ class View
 	public function render($viewScript)
 	{
 
-		// /* DEBUG */ msgToConsole ('Into: View::render.');
 
 	  if ($viewScript && $this->_viewEnabled) {
   		// renders the view script
@@ -82,7 +74,6 @@ class View
   		include(ROOT_PATH . '/app/views/layouts/' . $this->_getLayout() . '.phtml');
 		}
 
-		// /* DEBUG */ msgToConsole ('Leaving: View::render.');
 
 	}
 	

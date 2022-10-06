@@ -13,7 +13,6 @@ class Router
 	{
 		// tries to find the route and run the given action on the controller
 
-		// /* DEBUG */ msgToConsole ('Into: Router::execute.');
 
 		try {
 			// the controller and action to execute
@@ -31,15 +30,12 @@ class Router
 			// no route found, throw an exception to run the error controller
 			if (!$routeFound || $controller == null || $action == null) {
 
-				// /* DEBUG */ msgToConsole ('Exception to be thrown.');
 
 				throw new Exception('no route added for ' . $_SERVER['REQUEST_URI']);
 			}
 			else {
 				// executes the action on the controller
 
-				// /* DEBUG */ varToConsole ('controller', $controller);
-				// /* DEBUG */ varToConsole ('action', $action);
 
 				$controller->execute($action);
 				// $controller->checkAction($action);
@@ -48,14 +44,12 @@ class Router
 		catch(Exception $exception) {
 			// runs the error controller
 
-			// /* DEBUG */ msgToConsole ('Exception catched.');
 
 			$controller = new ErrorController ();
 			$controller->setException ($exception);
 			$controller->execute ('error');
 		}
 
-		// /* DEBUG */ msgToConsole ('Leaving: Router::execute.');
 
 	}
 
@@ -76,25 +70,17 @@ class Router
 	protected function _getUri()
 	{
 
-		// /* DEBUG */ msgToConsole ('Into: Router::_getUri.');
 
-		// /* DEBUG */ varToConsole ('_SERVER[REQUEST_URI]', $_SERVER['REQUEST_URI']);
 
 		$uri = explode('?',$_SERVER['REQUEST_URI']);
 
-		// /* DEBUG */ varToConsole ('exploded uri', $uri);
 
 		$uri = $uri[0];
 
-		// /* DEBUG */ varToConsole ('uri[0]', $uri);
 
 		$uri = substr($uri, strlen(WEB_ROOT));
 
-		// /* DEBUG */ varToConsole ('WEB_ROOT', WEB_ROOT);
-		// /* DEBUG */ varToConsole ('strlen (WEB_ROOT)', strlen(WEB_ROOT));
-		// /* DEBUG */ varToConsole ('substr uri', $uri);
 
-		// /* DEBUG */ msgToConsole ('Leaving: Router::_getUri.');
 
 		return $uri;
 	}
@@ -109,12 +95,10 @@ class Router
 	protected function _getSimpleRoute($routes, &$controller, &$action)
 	{
 
-		// /* DEBUG */ msgToConsole ('Into: Router::_getSimpleRoute.');
 
 		// fetches the URI
 		$uri = $this->_getUri();
 
-		// /* DEBUG */ varToConsole ('uri', $uri);
 
 		// if the route isn't defined, try to add a trailing slash
 		if (isset($routes[$uri])) {
@@ -136,10 +120,6 @@ class Router
 			// initializes the controller
 			$controller = $this->_initializeController($name);
 
-			// /* DEBUG */ varToConsole ('controller', $controller);
-			// /* DEBUG */ varToConsole ('name', $name);
-			// /* DEBUG */ varToConsole ('action', $action);
-			// /* DEBUG */ msgToConsole ('Leaving: Router::_getSimpleRoute.');
 
 			return true;
 		}
@@ -212,15 +192,12 @@ class Router
 	 */
 	protected function _initializeController($name)
 	{
-		// /* DEBUG */ msgToConsole ('Into: Router::_initializeController.');
 
 		// initializes the controller
 		$controller = ucfirst($name) . 'Controller';
 		// constructs the controller
 
-		// /* DEBUG */ varToConsole ('controller', $controller);
 
-		// /* DEBUG */ msgToConsole ('Leaving: Router::_initializeController.');
 
 		return new $controller();
 	}
