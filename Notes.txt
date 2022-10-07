@@ -26,15 +26,15 @@ Testing:
 1.- Validation for all forms.
 
 2.- User creation.
-2.1.- The task can not be created if the user doesn't exist.
 
 3.- Task creation.
-3.1.- The tast is not created if already exists.
+3.1.- The task can not be created if the user doesn't exist.
+3.2.- The tast is not created if already exists.
 
 4.- Task updating.
 4.1.- Task is only updated if it already exists.
 
 5.- List task.
-5.1.- Check a single task is listed.
-5.2.- Check all tasks are listed.
+5.1.- A single task is listed.
+5.2.- All tasks are listed.
 

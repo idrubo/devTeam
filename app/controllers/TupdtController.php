@@ -3,7 +3,6 @@
 require INCLUDE_PATH . '/app/controllers/vData.php';
 require INCLUDE_PATH . '/app/views/scripts/tupdt/view.php';
 
-
 $GLOBALS ['listing'] = "";
 
 class TupdtController extends ApplicationController
@@ -21,7 +20,6 @@ class TupdtController extends ApplicationController
 
   public function createAction ()
   {
-
     $this->getRequest ();
     $post = $this->_request->getAllParams ();
 
@@ -33,12 +31,10 @@ class TupdtController extends ApplicationController
       if (array_key_exists ('crtTask', $post))
         $this->crtTask ($post);
     }
-
   }
 
   public function UDAction ()
   {
-
     $this->getRequest ();
     $post = $this->_request->getAllParams ();
 
@@ -50,12 +46,10 @@ class TupdtController extends ApplicationController
       if (array_key_exists ('delete', $post))
         $this->delTask ($post);
     }
-
   }
 
   public function listAction ()
   {
-
     $this->getRequest ();
     $post = $this->_request->getAllParams ();
 
@@ -67,25 +61,19 @@ class TupdtController extends ApplicationController
       if (array_key_exists ('lstAll', $post))
         $this->lstAll ($post);
     }
-
   }
 
   private function crtUser ($post)
   {
-
     unset ($post ['crtUser']);
-
 
     if ($this->valD->vUser ($post))
       $this->model->saveUser ($post);
-
   }
 
   private function crtTask ($post)
   {
-
     unset ($post ['crtTask']);
-
 
     if ($this->valD->vTask ($post))
     {
@@ -94,31 +82,26 @@ class TupdtController extends ApplicationController
       if ($this->model->checkUser ($user))
         $this->model->saveTask ($post);
       else
-        $this->valD->setUsrE ('Must exist !!!');
+        $this->valD->setTusrE ('Must exist !!!');
     }
-
   }
 
   private function updtTask ($post)
   {
-
     unset ($post ['update']);
 
     if ($this->valD->vUpdT ($post))
       if (! $this->model->updateTask ($post))
         $this->valD->setUpdTE ('Not found !!!');
-
   }
 
   private function delTask($post)
   {
-
     unset ($post ['delete']);
 
     if ($this->valD->vDelT ($post))
       if (! $this->model->deleteTask ($post))
         $this->valD->setDelTE ('Not found !!!');
-
   }
 
   private function lstTask ($post)
@@ -132,8 +115,6 @@ class TupdtController extends ApplicationController
       else
         $this->valD->setLstTE ('NOT found !!!');
     }
-
-
   }
 
   private function lstAll ($post)
@@ -145,8 +126,6 @@ class TupdtController extends ApplicationController
 
     if (! count ($tasks) == 0) $this->prnV->showTasks ($tasks);
   }
-
 }
-
 ?>
 

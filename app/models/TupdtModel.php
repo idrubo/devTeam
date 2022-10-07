@@ -8,12 +8,10 @@ class TupdtModel extends Model
   {
     if (! file_exists (fsys::userP)) { fsys::xCrt (fsys::userP); }
     if (! file_exists (fsys::taskP)) { fsys::xCrt (fsys::taskP); }
-
   }
 
   public function saveUser ($post)
   {
-
     $user = (object) $post;
 
     $jsonUsr = fSys::jRead (fSys::userP);
@@ -26,29 +24,23 @@ class TupdtModel extends Model
       $jsonUsrs = json_encode ($phpUsr);
 
       fSys::jWrite (fSys::userP, $jsonUsrs);
-
     }
-
   }
 
   public function checkUser ($user)
   {
-
     $jsonUsr = fSys::jRead (fSys::userP);
 
     $phpUsr = json_decode ($jsonUsr, true);
 
     return $this->checkItem ($phpUsr, 'user', $user ['user']);
-
   }
 
   public function saveTask ($post)
   {
-
     $task = (object) $post;
 
     $jsonTsk = fSys::jRead (fSys::taskP);
-
 
     $phpTsk = json_decode ($jsonTsk, true);
 
@@ -57,15 +49,12 @@ class TupdtModel extends Model
       array_push ($phpTsk, $task);
       $jsonTsks = json_encode ($phpTsk);
 
-
       fSys::jWrite (fSys::taskP, $jsonTsks);
     }
-
   }
 
   public function updateTask ($post)
   {
-
     $task = (object) $post;
 
     $jsonTsk = fSys::jRead (fSys::taskP);
@@ -82,13 +71,11 @@ class TupdtModel extends Model
       return true;
     }
 
-
     return false;
   }
 
   public function deleteTask ($post)
   {
-
     $jsonTsk = fSys::jRead (fSys::taskP);
 
     $phpTsk = json_decode ($jsonTsk, true);
@@ -107,7 +94,6 @@ class TupdtModel extends Model
 
   public function listTask ($post)
   {
-
     $jsonTsk = fSys::jRead (fSys::taskP);
 
     $phpTsk = json_decode ($jsonTsk, true);
@@ -116,18 +102,15 @@ class TupdtModel extends Model
 
     if ($tasks !== false) return array ($tasks);
     else                  return false;
-
   }
 
   public function listAll ($post)
   {
-
     $jsonTsk = fSys::jRead (fSys::taskP);
 
     $phpTsk = json_decode ($jsonTsk, true);
 
     return $phpTsk;
-
   }
 
   private function checkItem ($arr, $key, $str)
@@ -177,8 +160,6 @@ class TupdtModel extends Model
 
     return false;
   }
-
 }
-
 ?>
 
