@@ -35,9 +35,9 @@ class fSys
 
   public static function jWrite ($name, $data)
   {
-    $jsonF = fSys::xOpen ($name, "w");
+    $jsonF = self::xOpen ($name, "w");
 
-    fSys::xWrite ($jsonF, $data);
+    self::xWrite ($jsonF, $data);
 
     fclose ($jsonF);
   }

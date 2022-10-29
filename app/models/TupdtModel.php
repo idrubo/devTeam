@@ -1,6 +1,6 @@
 <?php
 
-require INCLUDE_PATH . '/app/models/fsys.php';
+require_once INCLUDE_PATH . '/app/models/fsys.php';
 
 class TupdtModel extends Model
 {
@@ -55,15 +55,31 @@ class TupdtModel extends Model
 
   public function updateTask ($post)
   {
-    $task = (object) $post;
+    $udTsk = $post;
 
     $jsonTsk = fSys::jRead (fSys::taskP);
 
     $phpTsk = json_decode ($jsonTsk, true);
 
-    if ($this->delDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']))
+    /* DEBUG */
+    /* DEBUG */
+    /* DEBUG */
+    /*
+     * 1.- Read the proper record from the son file.
+     * 2.- Compare json sDate with post fDate, if there is a post date, keep it.
+     * 3.- Compare json fDate with post fDate, if there is a post date, keep it.
+     */
+
+    $tasks = $this->getDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']);
+
+    if ($tasks != false)
     {
-      array_push ($phpTsk, (object) $task);
+      $this->delDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']);
+
+      if (empty ($udTsk ['dStart']))  $udTsk ['dStart']  = $tasks ['dStart'];
+      if (empty ($udTsk ['dFinish'])) $udTsk ['dFinish'] = $tasks ['dFinish'];
+
+      array_push ($phpTsk, (object) $udTsk);
       $jsonTsks = json_encode ($phpTsk);
 
       fSys::jWrite (fSys::taskP, $jsonTsks);
@@ -72,6 +88,10 @@ class TupdtModel extends Model
     }
 
     return false;
+
+    /* DEBUG */
+    /* DEBUG */
+    /* DEBUG */
   }
 
   public function deleteTask ($post)
