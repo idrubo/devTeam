@@ -15,20 +15,20 @@
 // );
 
 $rIndex = array (
-  '/'        => 'tupdt#create',
+  '/'        => 'create#create',
 );
 
 $rCreate = array (
-  '/create/' => 'tupdt#create',
+  '/create/' => 'create#create',
 );
 
-$rUD = array (
-  '/UD/'     => 'tupdt#UD',
-);
-
-$rList = array (
-  '/list/'   => 'tupdt#list',
-);
+// $rUD = array (
+//   '/UD/'     => 'tupdt#UD',
+// );
+// 
+// $rList = array (
+//   '/list/'   => 'tupdt#list',
+// );
 
 ?>
 
