@@ -14,21 +14,21 @@
 //   '/'     => 'tupdt#index'
 // );
 
-// $rIndex = array (
-//   '/'        => 'create#create',
-// );
-// 
-// $rCreate = array (
-//   '/create/' => 'create#create',
-// );
+$rIndex = array (
+  '/'        => 'create#create',
+);
+
+$rCreate = array (
+  '/create/' => 'create#create',
+);
 
 $rUD = array (
   '/UD/'     => 'ud#UD',
 );
 
-// $rList = array (
-//   '/list/'   => 'list#list',
-// );
+$rList = array (
+  '/list/'   => 'list#list',
+);
 
 ?>
 

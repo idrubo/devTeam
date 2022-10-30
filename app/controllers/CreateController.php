@@ -2,28 +2,15 @@
 
 require INCLUDE_PATH . '/app/controllers/vData.php';
 
-/* DEBUG */
-/* DEBUG */
-/* DEBUG */
-/* Must be moved to app/views/scripts/list/ */
-require INCLUDE_PATH . '/app/views/scripts/tupdt/view.php';
-/* DEBUG */
-/* DEBUG */
-/* DEBUG */
-
-$GLOBALS ['listing'] = "";
-
 class CreateController extends ApplicationController
 {
   private $model;
   private $valD;
-  private $prnV;
 
   public function __construct ()
   {	
-    $this->model = new TupdtModel ();
+    $this->model = new createModel ();
     $this->valD  = new vData ();
-    $this->prnV  = new prnV ();
   }
 
   public function createAction ()
