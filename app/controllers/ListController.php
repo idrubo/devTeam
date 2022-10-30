@@ -1,7 +1,7 @@
 <?php
 
 require INCLUDE_PATH . '/app/controllers/vData.php';
-require INCLUDE_PATH . '/app/views/scripts/tupdt/view.php';
+require INCLUDE_PATH . '/app/views/scripts/list/view.php';
 
 $GLOBALS ['listing'] = "";
 
@@ -13,7 +13,7 @@ class ListController extends ApplicationController
 
   public function __construct ()
   {	
-    $this->model = new TupdtModel ();
+    $this->model = new listModel ();
     $this->valD  = new vData ();
     $this->prnV  = new prnV ();
   }
