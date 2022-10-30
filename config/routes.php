@@ -10,10 +10,6 @@
  * '/calendar' => 'calendar#index'
  */
 
-// $rIndex = array (
-//   '/'     => 'tupdt#index'
-// );
-
 $rIndex = array (
   '/'        => 'create#create',
 );
