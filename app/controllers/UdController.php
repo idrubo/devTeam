@@ -2,8 +2,6 @@
 
 require INCLUDE_PATH . '/app/controllers/vData.php';
 
-$GLOBALS ['listing'] = "";
-
 class UDController extends ApplicationController
 {
   private $model;
