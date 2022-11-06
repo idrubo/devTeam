@@ -23,10 +23,17 @@ class SQL
     $select = "SELECT SCHEMA_NAME FROM information_schema.schemata";
     $cmd = "$select" . "$where" . ";";
 
-    $stmt = $conn->prepare ("$cmd");
-    $stmt->execute ();
-    $stmt->setFetchMode (PDO::FETCH_ASSOC);
-    $data = $stmt->fetchAll ();
+    try
+    {
+      $stmt = $conn->prepare ("$cmd");
+      $stmt->execute ();
+      $stmt->setFetchMode (PDO::FETCH_ASSOC);
+      $data = $stmt->fetchAll ();
+    }
+    catch (PDOException $e)
+    {
+      echo "Connection failed: " . $e->getMessage () . "<br>";
+    }
 
     if (! count ($data)) $this->createDB ($conn);
 
@@ -40,12 +47,11 @@ class SQL
     try
     {
       $conn = new PDO ("mysql:host=$this->srv", $this->user, $this->pass);
-
       $conn->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     catch (PDOException $e)
     {
-      echo "Connection failed: " . $e->getMessage () . "\n";
+      echo "Connection failed: " . $e->getMessage () . "<br>";
     }
 
     return $conn;
@@ -53,11 +59,27 @@ class SQL
 
   private function createDB ($conn)
   {
-    $sql = "CREATE DATABASE $this->db;";
-    $conn->exec($sql);
+    $cmd = "CREATE DATABASE $this->db;";
 
-    $sql = "USE $this->db;";
-    $conn->exec($sql);
+    try 
+    {
+      $conn->exec ($cmd);
+    }
+    catch(PDOException $e)
+    {
+      echo $cmd . "<br>" . $e->getMessage() . "<br>";
+    }
+
+    $cmd = "USE $this->db;";
+
+    try 
+    {
+      $conn->exec ($cmd);
+    }
+    catch(PDOException $e)
+    {
+      echo $cmd . "<br>" . $e->getMessage() . "<br>";
+    }
 
     $this->createTbl ($conn);
   }
@@ -71,15 +93,22 @@ class SQL
 
     $cmd = $create . "\n" . $id . ",\n" . $user . "\n" . $close;
 
-    $conn->exec ($cmd);
+    try 
+    {
+      $conn->exec ($cmd);
+    }
+    catch(PDOException $e)
+    {
+      echo $cmd . "<br>" . $e->getMessage() . "<br>";
+    }
 
     $create   = "CREATE TABLE task (";
 
     $id         = "id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY";
     $idtasuse   = "idtasuse INT UNSIGNED NOT NULL";
     $task       = "task     VARCHAR (50) NOT NULL";
-    $startD     = "startD   DATE             NULL";
-    $finishD    = "finishD  DATE             NULL";
+    $startD     = "startD   DATETIME         NULL";
+    $finishD    = "finishD  DATETIME         NULL";
     $status     = "status   ENUM ('pending', 'running', 'finished') NOT NULL";
 
     $constraint = "CONSTRAINT idtas_iduse FOREIGN KEY (idtasuse)";
@@ -96,7 +125,14 @@ class SQL
     $cmd .= $onDelete . " \n" . $onUpdate . " \n";
     $cmd .= $close;
 
-    $conn->exec ($cmd);
+    try 
+    {
+      $conn->exec ($cmd);
+    }
+    catch(PDOException $e)
+    {
+      echo $cmd . "<br>" . $e->getMessage() . "<br>";
+    }
   }
 
   public function connectDB ()
@@ -104,15 +140,52 @@ class SQL
     try
     {
       $this->conn = new PDO ("mysql:host=$this->srv;dbname=$this->db", $this->user, $this->pass);
-
       $this->conn->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     catch (PDOException $e)
     {
-      echo "Connection failed: " . $e->getMessage () . "\n";
+      echo "Connection failed: " . $e->getMessage () . "<br>";
     }
   }
-}
 
+  public function getConn () { return $this->conn; }
+
+  public function insert ($table, $fields, $values)
+  {
+    $values = " VALUES $values";
+    $insert = "INSERT INTO $table $fields";
+    $cmd = "$insert" . "$values" . ";";
+
+    try 
+    {
+      $this->conn->exec ($cmd);
+    }
+    catch(PDOException $e)
+    {
+      echo $cmd . "<br>" . $e->getMessage() . "<br>";
+    }
+  }
+
+  public function select ($table, $field, $cond)
+  {
+    $where = " WHERE $cond";
+    $select = "SELECT $field FROM $table";
+    $cmd = "$select" . "$where" . ";";
+
+    try 
+    {
+      $stmt = $this->conn->prepare ("$cmd");
+      $stmt->execute ();
+      $stmt->setFetchMode (PDO::FETCH_ASSOC);
+      $data = $stmt->fetchAll ();
+    }
+    catch(PDOException $e)
+    {
+      echo $cmd . "<br>" . $e->getMessage() . "<br>";
+    }
+
+    return $data;
+  }
+}
 ?>
 
