@@ -12,11 +12,11 @@ class prnV
     {
       $GLOBALS ['listing'] .= "<tr>";
 
-      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['user']        . '</td>';
-      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['description'] . '</td>';
-      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['dStart']      . '</td>';
-      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['dFinish']     . '</td>';
-      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['status']      . '</td>';
+      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['user']    . '</td>';
+      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['task']    . '</td>';
+      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['startD']  . '</td>';
+      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['finishD'] . '</td>';
+      $GLOBALS ['listing'] .= '<td class="pr-2 pl-2">' . $t ['status']  . '</td>';
 
       $GLOBALS ['listing'] .= "</tr>";
 

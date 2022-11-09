@@ -15,6 +15,8 @@ class SQL
     $this->setUpDB ();
   }
 
+  public function __destruct() { $this->conn = null; }
+
   private function setUpDB ()
   {
     $conn = $this->connectSQL ();
@@ -185,6 +187,39 @@ class SQL
     }
 
     return $data;
+  }
+
+  public function update ($table, $columns, $cond)
+  {
+    $where = " WHERE $cond";
+    $update = "UPDATE $table";
+    $set    = " SET $columns";
+    $cmd = "$update" . "$set" . "$where" . ";";
+
+    try 
+    {
+      $this->conn->exec ($cmd);
+    }
+    catch(PDOException $e)
+    {
+      echo $cmd . "\n" . $e->getMessage() . "\n";
+    }
+  }
+
+  function delete ($table, $cond)
+  {
+    $where = " WHERE $cond";
+    $delete = "DELETE FROM $table";
+    $cmd = "$delete" . "$where" . ";";
+
+    try 
+    {
+      $this->conn->exec ($cmd);
+    }
+    catch(PDOException $e)
+    {
+      echo $cmd . "\n" . $e->getMessage() . "\n";
+    }
   }
 }
 ?>

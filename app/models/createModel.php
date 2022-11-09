@@ -1,20 +1,23 @@
 <?php
 
-require_once INCLUDE_PATH . '/app/models/fsys.php';
-require_once INCLUDE_PATH . '/app/models/dataUtil.php';
+require_once INCLUDE_PATH . '/app/models/dbUtil.php';
 
 class createModel extends Model
 {
-  private $sql;
+  private $sql, $util;
 
-  public function __construct () { $this->sql = new SQL (); }
+  public function __construct ()
+  {
+    $this->sql = new SQL ();
+    $this->util = new dbUtil ($this->sql);
+  }
 
   public function saveUser ($post)
   {
     $u = $post ['user'];
-    $user = "user = \"$u\"";
+    $cond = "user = \"$u\"";
 
-    $records = $this->sql->select ('user', 'user', $user);
+    $records = $this->sql->select ('user', 'user', $cond);
 
     if (! count ($records))
     {
@@ -23,18 +26,17 @@ class createModel extends Model
     }
   }
 
-  public function checkUser ($user) { return $this->fkIdTasUse ($user); }
+  public function checkUser ($user) { return $this->util->fkIdTasUse ($user); }
 
   public function saveTask ($post)
   {
     $u = $post ['user'];
-    $d = $post ['description'];
+    $t = $post ['description'];
+    $idtasuse = $this->util->fkIdTasUse ($u);
 
-    $idtasuse = $this->fkIdTasUse ($u);
-    $cond = "idtasuse = \"$idtasuse\" AND task = \"$d\"";
-    $data = $this->sql->select ('task', '*', $cond);
+    $task = $this->util->selectTask ($idtasuse, $t);
 
-    if (! count ($data))
+    if ($task === false)
     {
       $fields = 'idtasuse, task';
       $task   = $post ['description'];
@@ -60,16 +62,6 @@ class createModel extends Model
 
       $this->sql->insert ('task', $fields, $values);
     }
-  }
-
-  private function fkIdTasUse ($user)
-  {
-    $cond = "user = \"$user\"";
-    $data = $this->sql->select ('user', 'id', $cond);
-
-    if (count ($data)) return ($idtasuse = (integer) $data [0]['id']);
-
-    return 0;
   }
 }
 ?>
