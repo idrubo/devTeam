@@ -1,58 +1,66 @@
 <?php
 
-require_once INCLUDE_PATH . '/app/models/fsys.php';
-require_once INCLUDE_PATH . '/app/models/dataUtil.php';
+require_once INCLUDE_PATH . '/app/models/dbUtil.php';
 
 class udModel extends Model
 {
-  private $dUtil;
+  private $sql, $util;
 
   public function __construct ()
   {
-    $this->dUtil = new dataUtil ();
-
-    if (! file_exists (fsys::userP)) { fsys::xCrt (fsys::userP); }
-    if (! file_exists (fsys::taskP)) { fsys::xCrt (fsys::taskP); }
+    $this->sql = new SQL ();
+    $this->util = new dbUtil ($this->sql);
   }
 
   public function updateTask ($post)
   {
-    $udTsk = $post;
+    $u = $post ['user'];
+    $t = $post ['description'];
+    $idtasuse = $this->util->fkIdTasUse ($u);
 
-    $jsonTsk = fSys::jRead (fSys::taskP);
+    $task = $this->util->selectTask ($idtasuse, $t);
 
-    $phpTsk = json_decode ($jsonTsk, true);
-
-    $tasks = $this->dUtil->getDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']);
-
-    if ($tasks != false)
+    if ($task !== false)
     {
-      $this->dUtil->delDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']);
+      foreach ($task as $tsk)
+      {
+        if (empty ($post ['dStart']))  $post ['dStart']  = $tsk ['startD'];
+        if (empty ($post ['dFinish'])) $post ['dFinish'] = $tsk ['finishD'];
+      }
 
-      if (empty ($udTsk ['dStart']))  $udTsk ['dStart']  = $tasks ['dStart'];
-      if (empty ($udTsk ['dFinish'])) $udTsk ['dFinish'] = $tasks ['dFinish'];
+      $table   = 'task';
+      $dS      = $post ['dStart'];
+      $dF      = $post ['dFinish'];
+      $st      = $post ['status'];
 
-      array_push ($phpTsk, (object) $udTsk);
-      $jsonTsks = json_encode ($phpTsk);
+      if (! empty ($dS)) $columns = "startD = \"$dS\"";
 
-      fSys::jWrite (fSys::taskP, $jsonTsks);
+      if (! empty ($dF)) $columns .= ", finishD = \"$dF\"";
+
+      $columns .= ", status = \"$st\"";
+
+      $cond    = "idtasuse = $idtasuse AND task = \"$t\"";
+      $this->sql->update ($table, $columns, $cond);
 
       return true;
     }
+
     return false;
   }
 
   public function deleteTask ($post)
   {
-    $jsonTsk = fSys::jRead (fSys::taskP);
+    $u = $post ['user'];
+    $t = $post ['description'];
+    $idtasuse = $this->util->fkIdTasUse ($u);
 
-    $phpTsk = json_decode ($jsonTsk, true);
+    $task = $this->util->selectTask ($idtasuse, $t);
 
-    if ($this->dUtil->delDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']))
+    if ($task !== false)
     {
-      $jsonTsks = json_encode ($phpTsk);
-
-      fSys::jWrite (fSys::taskP, $jsonTsks);
+      $table = 'task';
+      $cond  = "idtasuse = $idtasuse AND task = \"$t\"";
+      $this->sql->delete ($table, $cond);
 
       return true;
     }

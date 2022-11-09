@@ -42,9 +42,7 @@ class CreateController extends ApplicationController
 
     if ($this->valD->vTask ($post))
     {
-      $user = array ('user' => $post ['user']);
-
-      if ($this->model->checkUser ($user))
+      if ($this->model->checkUser ($post ['user']))
         $this->model->saveTask ($post);
       else
         $this->valD->setTusrE ('Must exist !!!');

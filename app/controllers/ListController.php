@@ -52,7 +52,6 @@ class ListController extends ApplicationController
 
     $tasks = $this->model->listAll ($post);
 
-
     if (! count ($tasks) == 0) $this->prnV->showTasks ($tasks);
   }
 }

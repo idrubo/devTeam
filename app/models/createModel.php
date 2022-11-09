@@ -1,60 +1,66 @@
 <?php
 
-require_once INCLUDE_PATH . '/app/models/fsys.php';
-require_once INCLUDE_PATH . '/app/models/dataUtil.php';
+require_once INCLUDE_PATH . '/app/models/dbUtil.php';
 
 class createModel extends Model
 {
-  private $dUtil;
+  private $sql, $util;
 
   public function __construct ()
   {
-    $this->dUtil = new dataUtil ();
-
-    if (! file_exists (fsys::userP)) { fsys::xCrt (fsys::userP); }
-    if (! file_exists (fsys::taskP)) { fsys::xCrt (fsys::taskP); }
+    $this->sql = new SQL ();
+    $this->util = new dbUtil ($this->sql);
   }
 
   public function saveUser ($post)
   {
-    $user = (object) $post;
+    $u = $post ['user'];
+    $cond = "user = \"$u\"";
 
-    $jsonUsr = fSys::jRead (fSys::userP);
+    $records = $this->sql->select ('user', 'user', $cond);
 
-    $phpUsr = json_decode ($jsonUsr, true);
-
-    if (! $this->dUtil->checkItem ($phpUsr, 'user', $post ['user']))
+    if (! count ($records))
     {
-      array_push ($phpUsr, $user);
-      $jsonUsrs = json_encode ($phpUsr);
-
-      fSys::jWrite (fSys::userP, $jsonUsrs);
+      $user = "(\"$u\")";
+      $this->sql->insert ('user', '(user)', $user);
     }
   }
 
-  public function checkUser ($user)
-  {
-    $jsonUsr = fSys::jRead (fSys::userP);
-
-    $phpUsr = json_decode ($jsonUsr, true);
-
-    return $this->dUtil->checkItem ($phpUsr, 'user', $user ['user']);
-  }
+  public function checkUser ($user) { return $this->util->fkIdTasUse ($user); }
 
   public function saveTask ($post)
   {
-    $task = (object) $post;
+    $u = $post ['user'];
+    $t = $post ['description'];
+    $idtasuse = $this->util->fkIdTasUse ($u);
 
-    $jsonTsk = fSys::jRead (fSys::taskP);
+    $task = $this->util->selectTask ($idtasuse, $t);
 
-    $phpTsk = json_decode ($jsonTsk, true);
-
-    if (! $this->dUtil->checkDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']))
+    if ($task === false)
     {
-      array_push ($phpTsk, $task);
-      $jsonTsks = json_encode ($phpTsk);
+      $fields = 'idtasuse, task';
+      $task   = $post ['description'];
+      $values = "$idtasuse, \"$task\"";
 
-      fSys::jWrite (fSys::taskP, $jsonTsks);
+      if (! empty ($post ['dStart']))
+      {
+        $fields = $fields . ', startD';
+        $startD = $post ['dStart'];
+        $values = $values . ", \"$startD\"";
+      }
+
+      if (! empty ($post ['dFinish']))
+      {
+        $fields = $fields . ', finishD';
+        $finishD = $post ['dFinish'];
+        $values = $values . ", \"$finishD\"";
+      }
+
+      $fields = "(" . $fields .  ", status" . ")";
+      $status  = $post ['status'];
+      $values = "(" . $values . ", \"$status\"" . ")";
+
+      $this->sql->insert ('task', $fields, $values);
     }
   }
 }

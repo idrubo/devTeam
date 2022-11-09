@@ -1,39 +1,62 @@
 <?php
 
-require_once INCLUDE_PATH . '/app/models/fsys.php';
-require_once INCLUDE_PATH . '/app/models/dataUtil.php';
+require_once INCLUDE_PATH . '/app/models/dbUtil.php';
 
 class listModel extends Model
 {
-  private $dUtil;
+  private $sql, $util;
 
   public function __construct ()
   {
-    $this->dUtil = new dataUtil ();
-
-    if (! file_exists (fsys::userP)) { fsys::xCrt (fsys::userP); }
-    if (! file_exists (fsys::taskP)) { fsys::xCrt (fsys::taskP); }
+    $this->sql = new SQL ();
+    $this->util = new dbUtil ($this->sql);
   }
 
   public function listTask ($post)
   {
-    $jsonTsk = fSys::jRead (fSys::taskP);
+    $u = $post ['user'];
+    $t = $post ['description'];
+    $idtasuse = $this->util->fkIdTasUse ($u);
 
-    $phpTsk = json_decode ($jsonTsk, true);
+    if (! $idtasuse) return false;
 
-    $tasks = $this->dUtil->getDbl ($phpTsk, 'user', $post ['user'], 'description', $post ['description']);
+    $task = $this->util->selectTask ($idtasuse, $t);
 
-    if ($tasks !== false) return array ($tasks);
-    else                  return false;
+    if ($task !== false)
+    {
+      foreach ($task as $t)
+      {
+        unset ($t ['id']);
+        unset ($t ['idtasuse']);
+        $t ['user'] = $u;
+      }
+
+      return array ($t);
+    }
+
+    return false;
   }
 
   public function listAll ($post)
   {
-    $jsonTsk = fSys::jRead (fSys::taskP);
+    $list = array ();
 
-    $phpTsk = json_decode ($jsonTsk, true);
+    $task = $this->sql->select ('task', '*', 'true');
 
-    return $phpTsk;
+    foreach ($task as $t)
+    {
+      $id = $t ['idtasuse'];
+      $user = $this->sql->select ('user', 'user', "id = \"$id\"");
+
+      unset ($t ['id']);
+      unset ($t ['idtasuse']);
+
+      foreach ($user as $u) $t ['user'] = $u ['user'];
+
+      array_push ($list, $t);
+    }
+
+    return $list;
   }
 }
 ?>

@@ -222,7 +222,7 @@ class vData
 
   private function isValidDate ($date)
   {
-    $format = 'j-n-Y G:i';
+    $format = 'Y-m-d H:i:s';
 
     $dt = DateTime::createFromFormat ($format, $date);
 
