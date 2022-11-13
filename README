@@ -1,0 +1,13 @@
+Application logic:
+
+1.- A task is identified by the unique combination of a user and a task description.
+2.- If a user or a task already exits, the logic, silently, refuses to create it.
+3.- A user must be created before it can be assigned a task.
+4.- To update a task enter the user, the task description and the data to modify at once.
+5.- To delete a task enter the user and the task description.
+6.- To list a task enter the user and description for the task.
+7.- Date format:
+Day, month and hour need leading zeroes.
+Hour is typed wit a 24h format, and need leading zeroes.
+Minutes and seconds must have a leading zero.
+
