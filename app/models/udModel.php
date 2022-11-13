@@ -1,7 +1,5 @@
 <?php
 
-require_once INCLUDE_PATH . '/app/models/dbUtil.php';
-
 class udModel extends Model
 {
   private $mDB;
