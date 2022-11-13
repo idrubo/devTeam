@@ -4,68 +4,45 @@ require_once INCLUDE_PATH . '/app/models/dbUtil.php';
 
 class udModel extends Model
 {
-  private $sql, $util;
+  private $mDB;
 
-  public function __construct ()
-  {
-    $this->sql = new SQL ();
-    $this->util = new dbUtil ($this->sql);
-  }
+  public function __construct () { $this->mDB = new mongoDB (); }
 
   public function updateTask ($post)
   {
-    $u = $post ['user'];
-    $t = $post ['description'];
-    $idtasuse = $this->util->fkIdTasUse ($u);
+    $filter = array ('user' => $post ['user'], 'task' => $post ['task']);
 
-    $task = $this->util->selectTask ($idtasuse, $t);
+    $task = $this->mDB->find ($filter);
 
-    if ($task !== false)
-    {
-      foreach ($task as $tsk)
-      {
-        if (empty ($post ['dStart']))  $post ['dStart']  = $tsk ['startD'];
-        if (empty ($post ['dFinish'])) $post ['dFinish'] = $tsk ['finishD'];
-      }
+    if (count ($task))
+     {
+       foreach ($task as $tsk)
+       {
+         if (empty ($post ['startD']))  $post ['startD']  = $tsk ['startD'];
+         if (empty ($post ['finishD'])) $post ['finishD'] = $tsk ['finishD'];
+       }
 
-      $table   = 'task';
-      $dS      = $post ['dStart'];
-      $dF      = $post ['dFinish'];
-      $st      = $post ['status'];
-
-      if (! empty ($dS)) $columns = "startD = \"$dS\"";
-
-      if (! empty ($dF)) $columns .= ", finishD = \"$dF\"";
-
-      $columns .= ", status = \"$st\"";
-
-      $cond    = "idtasuse = $idtasuse AND task = \"$t\"";
-      $this->sql->update ($table, $columns, $cond);
-
-      return true;
-    }
-
-    return false;
+       $this->mDB->update ($filter, $post);
+ 
+       return true;
+     }
+ 
+     return false;
   }
 
   public function deleteTask ($post)
   {
-    $u = $post ['user'];
-    $t = $post ['description'];
-    $idtasuse = $this->util->fkIdTasUse ($u);
+    $filter = array ('user' => $post ['user'], 'task' => $post ['task']);
 
-    $task = $this->util->selectTask ($idtasuse, $t);
+    $task = $this->mDB->find ($filter);
 
-    if ($task !== false)
-    {
-      $table = 'task';
-      $cond  = "idtasuse = $idtasuse AND task = \"$t\"";
-      $this->sql->delete ($table, $cond);
-
-      return true;
+     if (count ($task))
+     {
+       $this->mDB->delete ($filter);
+       return true;
     }
 
-    return false;
+     return false;
   }
 }
 ?>

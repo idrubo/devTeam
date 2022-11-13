@@ -4,36 +4,21 @@ require_once INCLUDE_PATH . '/app/models/dbUtil.php';
 
 class listModel extends Model
 {
-  private $sql, $util;
+  private $mDB;
 
-  public function __construct ()
-  {
-    $this->sql = new SQL ();
-    $this->util = new dbUtil ($this->sql);
-  }
+  public function __construct () { $this->mDB = new mongoDB (); }
 
   public function listTask ($post)
   {
-    $u = $post ['user'];
-    $t = $post ['description'];
-    $idtasuse = $this->util->fkIdTasUse ($u);
+    $filter = array ('user' => $post ['user'], 'task' => $post ['task']);
 
-    if (! $idtasuse) return false;
+    $task = $this->mDB->find ($filter);
 
-    $task = $this->util->selectTask ($idtasuse, $t);
-
-    if ($task !== false)
+    if (count ($task))
     {
-      foreach ($task as $t)
-      {
-        unset ($t ['id']);
-        unset ($t ['idtasuse']);
-        $t ['user'] = $u;
-      }
-
+      foreach ($task as $t) unset ($t ['_id']);
       return array ($t);
     }
-
     return false;
   }
 
@@ -41,23 +26,17 @@ class listModel extends Model
   {
     $list = array ();
 
-    $task = $this->sql->select ('task', '*', 'true');
+    $task = $this->mDB->find (array ());
 
     foreach ($task as $t)
     {
-      $id = $t ['idtasuse'];
-      $user = $this->sql->select ('user', 'user', "id = \"$id\"");
-
-      unset ($t ['id']);
-      unset ($t ['idtasuse']);
-
-      foreach ($user as $u) $t ['user'] = $u ['user'];
-
+      unset ($t ['_id']);
       array_push ($list, $t);
     }
 
     return $list;
   }
 }
+
 ?>
 

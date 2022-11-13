@@ -19,21 +19,8 @@ class CreateController extends ApplicationController
     $post = $this->_request->getAllParams ();
 
     if (! empty ($post))
-    {
-      if (array_key_exists ('crtUser', $post))
-        $this->crtUser ($post);
-
       if (array_key_exists ('crtTask', $post))
         $this->crtTask ($post);
-    }
-  }
-
-  private function crtUser ($post)
-  {
-    unset ($post ['crtUser']);
-
-    if ($this->valD->vUser ($post))
-      $this->model->saveUser ($post);
   }
 
   private function crtTask ($post)
@@ -41,12 +28,7 @@ class CreateController extends ApplicationController
     unset ($post ['crtTask']);
 
     if ($this->valD->vTask ($post))
-    {
-      if ($this->model->checkUser ($post ['user']))
-        $this->model->saveTask ($post);
-      else
-        $this->valD->setTusrE ('Must exist !!!');
-    }
+      $this->model->saveTask ($post);
   }
 }
 ?>

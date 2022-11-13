@@ -162,7 +162,7 @@ class SQL
     {
       $this->conn->exec ($cmd);
     }
-    catch(PDOException $e)
+    catch (PDOException $e)
     {
       echo $cmd . "<br>" . $e->getMessage() . "<br>";
     }

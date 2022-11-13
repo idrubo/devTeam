@@ -1,8 +1,5 @@
 <?php
 
-/* For create user: */
-$GLOBALS ['usrErr'] = "";
-
 /* For create task: */
 $GLOBALS ['tusErr'] = $GLOBALS ['desErr'] = "";
 $GLOBALS ['dstErr'] = $GLOBALS ['dfiErr'] = "";
@@ -21,26 +18,6 @@ $GLOBALS ['lusErr'] = $GLOBALS ['ldeErr'] = "";
 
 class vData
 {
-  /* Create user form. */
-  public function vUser ($post)
-  {
-    $r = true;
-
-    if (empty ($post ['user'] = trim ($post ['user'])))
-    {
-      $GLOBALS ['usrErr'] = "Empty !!!";
-      return $r = false;
-    }
-
-    if (strlen ($post ['user']) > 20)
-    {
-      $GLOBALS ['usrErr'] = "Too long !!!";
-      return $r = false;
-    }
-
-    return $r;
-  }
-
   /* Create task form. */
   public function vTask ($post)
   {
@@ -58,27 +35,27 @@ class vData
       return $r = false;
     }
 
-    if (empty ($post ['description'] = trim ($post ['description'])))
+    if (empty ($post ['task'] = trim ($post ['task'])))
     {
       $GLOBALS ['desErr'] = "Empty !";
       $r = false;
     }
 
-    if (strlen ($post ['description']) > 50)
+    if (strlen ($post ['task']) > 50)
     {
       $GLOBALS ['desErr'] = "Too long !!!";
       return $r = false;
     }
 
-    if (! empty ($post ['dStart'] = trim ($post ['dStart'])))
-      if (! $this->isValidDate ($post ['dStart']))
+    if (! empty ($post ['startD'] = trim ($post ['startD'])))
+      if (! $this->isValidDate ($post ['startD']))
       {
         $GLOBALS ['dstErr'] = "Invalid !";
         $r = false;
       }
 
-    if (! empty ($post ['dFinish'] = trim ($post ['dFinish'])))
-      if (! $this->isValidDate ($post ['dFinish']))
+    if (! empty ($post ['finishD'] = trim ($post ['finishD'])))
+      if (! $this->isValidDate ($post ['finishD']))
       {
         $GLOBALS ['dfiErr'] = "Invalid !";
         $r = false;
@@ -110,27 +87,27 @@ class vData
       return $r = false;
     }
 
-    if (empty ($post ['description'] = trim ($post ['description'])))
+    if (empty ($post ['task'] = trim ($post ['task'])))
     {
       $GLOBALS ['udeErr'] = "Empty !";
       $r = false;
     }
 
-    if (strlen ($post ['description']) > 50)
+    if (strlen ($post ['task']) > 50)
     {
       $GLOBALS ['udeErr'] = "Too long !!!";
       return $r = false;
     }
 
-    if (! empty ($post ['dStart'] = trim ($post ['dStart'])))
-      if (! $this->isValidDate ($post ['dStart']))
+    if (! empty ($post ['startD'] = trim ($post ['startD'])))
+      if (! $this->isValidDate ($post ['startD']))
       {
         $GLOBALS ['udsErr'] = "Invalid !";
         $r = false;
       }
 
-    if (! empty ($post ['dFinish'] = trim ($post ['dFinish'])))
-      if (! $this->isValidDate ($post ['dFinish']))
+    if (! empty ($post ['finishD'] = trim ($post ['finishD'])))
+      if (! $this->isValidDate ($post ['finishD']))
       {
         $GLOBALS ['udfErr'] = "Invalid !";
         $r = false;
@@ -162,13 +139,13 @@ class vData
       return $r = false;
     }
 
-    if (empty ($post ['description'] = trim ($post ['description'])))
+    if (empty ($post ['task'] = trim ($post ['task'])))
     {
       $GLOBALS ['ddeErr'] = "Empty !";
       $r = false;
     }
 
-    if (strlen ($post ['description']) > 50)
+    if (strlen ($post ['task']) > 50)
     {
       $GLOBALS ['ddeErr'] = "Too long !!!";
       return $r = false;
@@ -190,9 +167,9 @@ class vData
       return $r = false;
     }
 
-    $post ['description'] = trim ($post ['description']);
+    $post ['task'] = trim ($post ['task']);
 
-    if (strlen ($post ['description']) > 50)
+    if (strlen ($post ['task']) > 50)
     {
       $GLOBALS ['ldeErr'] = "Too long !!!";
       return $r = false;
@@ -200,8 +177,6 @@ class vData
 
     return $r;
   }
-
-  public function setUsrE ($msg) { $GLOBALS ['usrErr'] = $msg; }
 
   public function setTusrE ($msg) { $GLOBALS ['tusErr'] = $msg; }
 
