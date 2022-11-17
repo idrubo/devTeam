@@ -2,10 +2,12 @@
 
 namespace MongoDB\Tests\Operation;
 
+use MongoDB\Model\DatabaseInfo;
+use MongoDB\Model\DatabaseInfoIterator;
 use MongoDB\Operation\InsertOne;
 use MongoDB\Operation\ListDatabases;
 use MongoDB\Tests\CommandObserver;
-use stdClass;
+use function version_compare;
 
 class ListDatabasesFunctionalTest extends FunctionalTestCase
 {
@@ -17,14 +19,39 @@ class ListDatabasesFunctionalTest extends FunctionalTestCase
         $writeResult = $insertOne->execute($server);
         $this->assertEquals(1, $writeResult->getInsertedCount());
 
-        $operation = new ListDatabases();
-        $databases = $operation->execute($server);
+        $databases = null;
+        (new CommandObserver())->observe(
+            function () use (&$databases, $server) {
+                $operation = new ListDatabases();
 
-        $this->assertInstanceOf('MongoDB\Model\DatabaseInfoIterator', $databases);
+                $databases = $operation->execute($server);
+            },
+            function (array $event) {
+                $this->assertObjectNotHasAttribute('authorizedDatabases', $event['started']->getCommand());
+            }
+        );
+
+        $this->assertInstanceOf(DatabaseInfoIterator::class, $databases);
 
         foreach ($databases as $database) {
-            $this->assertInstanceOf('MongoDB\Model\DatabaseInfo', $database);
+            $this->assertInstanceOf(DatabaseInfo::class, $database);
         }
+    }
+
+    public function testAuthorizedDatabasesOption()
+    {
+        (new CommandObserver())->observe(
+            function () {
+                $operation = new ListDatabases(
+                    ['authorizedDatabases' => true]
+                );
+
+                $operation->execute($this->getPrimaryServer());
+            },
+            function (array $event) {
+                $this->assertObjectHasAttribute('authorizedDatabases', $event['started']->getCommand());
+            }
+        );
     }
 
     public function testFilterOption()
@@ -42,12 +69,12 @@ class ListDatabasesFunctionalTest extends FunctionalTestCase
         $operation = new ListDatabases(['filter' => ['name' => $this->getDatabaseName()]]);
         $databases = $operation->execute($server);
 
-        $this->assertInstanceOf('MongoDB\Model\DatabaseInfoIterator', $databases);
+        $this->assertInstanceOf(DatabaseInfoIterator::class, $databases);
 
         $this->assertCount(1, $databases);
 
         foreach ($databases as $database) {
-            $this->assertInstanceOf('MongoDB\Model\DatabaseInfo', $database);
+            $this->assertInstanceOf(DatabaseInfo::class, $database);
             $this->assertEquals($this->getDatabaseName(), $database->getName());
         }
     }
@@ -58,15 +85,15 @@ class ListDatabasesFunctionalTest extends FunctionalTestCase
             $this->markTestSkipped('Sessions are not supported');
         }
 
-        (new CommandObserver)->observe(
-            function() {
+        (new CommandObserver())->observe(
+            function () {
                 $operation = new ListDatabases(
                     ['session' => $this->createSession()]
                 );
 
                 $operation->execute($this->getPrimaryServer());
             },
-            function(array $event) {
+            function (array $event) {
                 $this->assertObjectHasAttribute('lsid', $event['started']->getCommand());
             }
         );

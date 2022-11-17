@@ -4,7 +4,7 @@ class listModel extends Model
 {
   private $mDB;
 
-  public function __construct () { $this->mDB = new mongoDB (); }
+  public function __construct () { $this->mDB = new mngDB (); }
 
   public function listTask ($post)
   {

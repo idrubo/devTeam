@@ -37,8 +37,8 @@ function autoloader($className) {
 		else if (file_exists($root_path . '/lib/' . $className . '.php')) {
 			require_once $root_path . '/lib/' . $className . '.php';
 		}
-		else {
-			require_once $root_path . '/app/models/'.$className.'.php';
+    else {
+        require_once $root_path . '/app/models/'.$className.'.php';
 		}
 	}
 }

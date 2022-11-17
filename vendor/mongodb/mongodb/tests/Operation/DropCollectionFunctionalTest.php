@@ -6,14 +6,15 @@ use MongoDB\Operation\DropCollection;
 use MongoDB\Operation\InsertOne;
 use MongoDB\Operation\ListCollections;
 use MongoDB\Tests\CommandObserver;
-use stdClass;
+use function sprintf;
+use function version_compare;
 
 class DropCollectionFunctionalTest extends FunctionalTestCase
 {
     public function testDefaultWriteConcernIsOmitted()
     {
-        (new CommandObserver)->observe(
-            function() {
+        (new CommandObserver())->observe(
+            function () {
                 $operation = new DropCollection(
                     $this->getDatabaseName(),
                     $this->getCollectionName(),
@@ -22,7 +23,7 @@ class DropCollectionFunctionalTest extends FunctionalTestCase
 
                 $operation->execute($this->getPrimaryServer());
             },
-            function(array $event) {
+            function (array $event) {
                 $this->assertObjectNotHasAttribute('writeConcern', $event['started']->getCommand());
             }
         );
@@ -37,8 +38,9 @@ class DropCollectionFunctionalTest extends FunctionalTestCase
         $this->assertEquals(1, $writeResult->getInsertedCount());
 
         $operation = new DropCollection($this->getDatabaseName(), $this->getCollectionName());
-        $operation->execute($server);
+        $commandResult = $operation->execute($server);
 
+        $this->assertCommandSucceeded($commandResult);
         $this->assertCollectionDoesNotExist($this->getCollectionName());
     }
 
@@ -50,7 +52,11 @@ class DropCollectionFunctionalTest extends FunctionalTestCase
         $this->assertCollectionDoesNotExist($this->getCollectionName());
 
         $operation = new DropCollection($this->getDatabaseName(), $this->getCollectionName());
-        $operation->execute($this->getPrimaryServer());
+        $commandResult = $operation->execute($this->getPrimaryServer());
+
+        /* Avoid inspecting the result document as mongos returns {ok:1.0},
+         * which is inconsistent from the expected mongod response of {ok:0}. */
+        $this->assertIsObject($commandResult);
     }
 
     public function testSessionOption()
@@ -59,8 +65,8 @@ class DropCollectionFunctionalTest extends FunctionalTestCase
             $this->markTestSkipped('Sessions are not supported');
         }
 
-        (new CommandObserver)->observe(
-            function() {
+        (new CommandObserver())->observe(
+            function () {
                 $operation = new DropCollection(
                     $this->getDatabaseName(),
                     $this->getCollectionName(),
@@ -69,7 +75,7 @@ class DropCollectionFunctionalTest extends FunctionalTestCase
 
                 $operation->execute($this->getPrimaryServer());
             },
-            function(array $event) {
+            function (array $event) {
                 $this->assertObjectHasAttribute('lsid', $event['started']->getCommand());
             }
         );
