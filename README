@@ -1,4 +1,5 @@
 Application logic:
+-------------------
 
 1.- A task is identified by the unique combination of a user and a task description.
 2.- If a user or a task already exits, the logic, silently, refuses to create it.
