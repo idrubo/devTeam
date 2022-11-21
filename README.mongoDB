@@ -1,0 +1,16 @@
+Application logic:
+-------------------
+
+1.- A task is identified by the unique combination of a user and a task description.
+2.- If a task already exits, the logic, silently, refuses to create it.
+3.- To update a task enter the user, the task description and the data to modify at once.
+4.- To delete a task enter the user and the task description.
+5.- To list a task enter the user and description for the task.
+6.- Date format:
+Day, month and hour need leading zeroes.
+Hour is typed wit a 24h format, and need leading zeroes.
+Minutes and seconds must have a leading zero.
+
+Version for the extension: php_mongodb-1.9.2-7.4-ts-vc15-x64
+Version for the library: "1.8.*"
+
